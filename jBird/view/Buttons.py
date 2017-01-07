@@ -6,7 +6,9 @@ pygame.init()
 
 
 class Button:
+    """Class containing methods which display buttons."""
     def create(self, surface, color, x, y, length, height, width, text, text_color):
+        """Creating new button."""
         surface = self.draw_button(surface, color, length, height, x, y, width)
         surface = self.write_text(surface, text, text_color, length, height, x, y)
         self.rect = pygame.Rect(x, y, length, height)
@@ -14,6 +16,7 @@ class Button:
         return surface
 
     def draw_button(self, surface, color, length, height, x, y, width):
+        """Drawing button."""
         for i in range(1, 10):
             s = pygame.Surface((length + (i * 2), height + (i * 2)))
             s.fill(color)
@@ -28,6 +31,7 @@ class Button:
         return surface
 
     def write_text(self, window, text, text_color, length, height, x, y):
+        """Writing text on the button."""
         font_size = int(length // len(text))
         myFont = pygame.font.SysFont("Calibri", font_size)
         myText = myFont.render(text, 1, text_color)
@@ -35,6 +39,7 @@ class Button:
         return window
 
     def pressed(self, mouse):
+        """Checking if button is pressed."""
         return self.buttonClick.pressed(self.rect, mouse)
 
 
