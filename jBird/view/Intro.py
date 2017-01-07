@@ -3,6 +3,7 @@ from pygame.constants import MOUSEBUTTONDOWN
 
 from jBird.utils.ScreenSize import ScreenSize
 from jBird.view import Buttons
+from jBird.view.ImputBox import ask
 
 pygame.init()
 
@@ -20,6 +21,7 @@ screen.blit(mainTextLabel, (520, 20))
 
 button1 = Buttons.Button()
 button1.create(screen, (107, 142, 35), height // 2, width // 2, 200, 100, 0, "NEW GAME", (255, 255, 255))
+
 
 pygame.display.flip()
 
