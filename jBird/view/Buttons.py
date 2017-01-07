@@ -36,8 +36,3 @@ class Button:
 
     def pressed(self, mouse):
         return self.buttonClick.pressed(self.rect, mouse)
-
-
-
-
-
