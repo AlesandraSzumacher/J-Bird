@@ -41,8 +41,3 @@ class Button:
     def pressed(self, mouse):
         """Checking if button is pressed."""
         return self.buttonClick.pressed(self.rect, mouse)
-
-
-
-
-
