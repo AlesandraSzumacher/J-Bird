@@ -1,5 +1,7 @@
 import pygame
 
+from jBird.control.ButtonControl import ButtonControl
+
 pygame.init()
 
 
@@ -8,6 +10,7 @@ class Button:
         surface = self.draw_button(surface, color, length, height, x, y, width)
         surface = self.write_text(surface, text, text_color, length, height, x, y)
         self.rect = pygame.Rect(x, y, length, height)
+        self.buttonClick = ButtonControl()
         return surface
 
     def draw_button(self, surface, color, length, height, x, y, width):
@@ -32,7 +35,7 @@ class Button:
         return window
 
     def pressed(self, mouse):
-        self.buttonClick.pressed(self.rect, mouse)
+        return self.buttonClick.pressed(self.rect, mouse)
 
 
 
