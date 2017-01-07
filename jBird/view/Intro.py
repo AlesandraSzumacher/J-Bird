@@ -1,12 +1,12 @@
 import pygame
 from pygame.constants import MOUSEBUTTONDOWN
 
-from jBird.utils import ScreenSize
+from jBird.utils.ScreenSize import ScreenSize
 from jBird.view import Buttons
 
 pygame.init()
 
-(width, height) = (800, 600)#(ScreenSize.WIDTH, ScreenSize.HEIGHT)
+(width, height) = (ScreenSize.WIDTH.value, ScreenSize.HEIGHT.value)
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('J-Bird')
 
@@ -19,7 +19,7 @@ mainTextLabel = myFont.render("J-BIRD", 1, (0, 255, 0))
 screen.blit(mainTextLabel, (520, 20))
 
 button1 = Buttons.Button()
-button1.create(screen, (107,142,35), 225, 135, 200,    100,    0,        "Example", (255,255,255))
+button1.create(screen, (107, 142, 35), height // 2, width // 2, 200, 100, 0, "NEW GAME", (255, 255, 255))
 
 pygame.display.flip()
 
