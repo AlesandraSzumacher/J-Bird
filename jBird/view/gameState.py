@@ -1,19 +1,11 @@
 import pygame
-pygame.init()
+from jBird.utils.ScreenSize import ScreenSize
 
-(width, height) = (800, 600)
+(width, height) = (ScreenSize.WIDTH.value, ScreenSize.HEIGHT.value)
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('J-Bird')
 
 background_colour = (0, 0, 0)
 screen.fill(background_colour)
-
-myFont = pygame.font.SysFont("arial", 80)
-mainTextLabel = myFont.render("J-BIRD", 1, (0, 255, 0))
-
-screen.blit(mainTextLabel, (520, 20))
-
-
 
 pygame.display.flip()
 
