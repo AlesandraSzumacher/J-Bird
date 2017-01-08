@@ -7,15 +7,15 @@ pygame.init()
 
 class Button:
     """Class containing methods which display buttons."""
-    def create(self, surface, color, x, y, length, height, width, text, text_color):
+    def create(self, screen, color, x, y, length, height, width, text, text_color):
         """Creating new button."""
-        surface = self.draw_button(surface, color, length, height, x, y, width)
-        surface = self.write_text(surface, text, text_color, length, height, x, y)
+        screen = self.draw_button(screen, color, length, height, x, y, width)
+        screen = self.write_text(screen, text, text_color, length, height, x, y)
         self.rect = pygame.Rect(x, y, length, height)
         self.buttonClick = ButtonControl()
-        return surface
+        return screen
 
-    def draw_button(self, surface, color, length, height, x, y, width):
+    def draw_button(self, screen, color, length, height, x, y, width):
         """Drawing button."""
         for i in range(1, 10):
             s = pygame.Surface((length + (i * 2), height + (i * 2)))
@@ -25,10 +25,10 @@ class Button:
                 alpha = 1
             s.set_alpha(alpha)
             pygame.draw.rect(s, color, (x - i, y - i, length + i, height + i), width)
-            surface.blit(s, (x - i, y - i))
-        pygame.draw.rect(surface, color, (x, y, length, height), 0)
-        pygame.draw.rect(surface, (190, 190, 190), (x, y, length, height), 1)
-        return surface
+            screen.blit(s, (x - i, y - i))
+        pygame.draw.rect(screen, color, (x, y, length, height), 0)
+        pygame.draw.rect(screen, (190, 190, 190), (x, y, length, height), 1)
+        return screen
 
     def write_text(self, window, text, text_color, length, height, x, y):
         """Writing text on the button."""
