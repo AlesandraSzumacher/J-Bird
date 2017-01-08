@@ -1,26 +1,22 @@
 import pygame
 from pygame import gfxdraw
 
+from jBird.utils.ScreenSize import TileColor
+
+
 class Rhombus:
-    def __init__(self, h = 5, w = 10):
-        self.h = h
-        self.w = w
-        self.listOfCoordinates = []
+    def __init__(self, tile):
+        self.tile = tile
+        self.listOfCoordinates = tile.coordinates
+        self.color = TileColor.START_COLOR.value
 
-    def create(self, screen, color, leftCoordinates):
-        screen = self.draw_rhombus(screen, color, leftCoordinates)
 
-    def draw_rhombus(self, screen, color, leftCoordinate):
-        upCoordinate = [leftCoordinate[0] + self.w, leftCoordinate[1] - self.h]
-        downCoordinate = [leftCoordinate[0] + self.w, leftCoordinate[1] + self.h]
-        rightCoordinate = [leftCoordinate[0] + self.w * 2, leftCoordinate[1]]
-        self.listOfCoordinates = [leftCoordinate, upCoordinate, rightCoordinate, downCoordinate]
-
-        pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, color)
+    def draw_rhombus(self, screen):
+        pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, self.color)
 
         return screen
 
-    def changeColor(self, color):
+    def changeColor(self, screen, color):
         pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, color)
         return screen
 

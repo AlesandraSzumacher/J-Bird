@@ -1,5 +1,8 @@
 import pygame
+
+from jBird.logic.Game import Game
 from jBird.utils.ScreenSize import ScreenSize
+from jBird.view.BoardDisplayer import BoardDisplay
 from jBird.view.Rhombus import Rhombus
 
 pygame.init()
@@ -7,6 +10,7 @@ pygame.init()
 
 class GameState:
     def __init__(self):
+        game = Game()
 
         (width, height) = (ScreenSize.WIDTH.value, ScreenSize.HEIGHT.value)
         screen = pygame.display.set_mode((width, height))
@@ -17,12 +21,15 @@ class GameState:
         arialFont = pygame.font.SysFont("arial", 40)
         player = arialFont.render("Player: ", 1, (0, 255, 0))
         screen.blit(player, (0, 0))
-
+        '''
         rhH = 25
         rhW = 40
         rhombus = Rhombus(rhH, rhW)
         rhombus.create(screen, (0,0,255), (width // 2 + 1 - rhW, 200))
+        '''
+        boardDis = BoardDisplay(game.board)
 
+        boardDis.displayBoard(screen)
         pygame.display.flip()
 
         running = True

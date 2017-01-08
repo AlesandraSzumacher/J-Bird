@@ -1,5 +1,7 @@
 import pygame
 
+from jBird.logic.Board import Board
+
 
 class Game(object):
     """Class containing  methods which refer to game, such as levels and rounds."""
@@ -7,6 +9,7 @@ class Game(object):
         """Initializing new Game."""
         self.level = 1
         self.round = 1
+        self.board = Board([601, 100])
 
     def next_level(self):
         """Changing level into next."""

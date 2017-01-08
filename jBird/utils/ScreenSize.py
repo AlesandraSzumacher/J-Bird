@@ -14,5 +14,9 @@ class PlayerPos(Enum):
 class BoardSize(Enum):
     TILE_WIDTH = 80
     TILE_HEIGHT = 50
-    CUBE_BREAK_HEIGHT = 15
+    CUBE_BREAK_HEIGHT = 50
     LEVELS_NUMBER = 7
+
+class TileColor(Enum):
+    START_COLOR = (0,0,255)
+    TOUCH_COLOR = (255, 0, 0)
