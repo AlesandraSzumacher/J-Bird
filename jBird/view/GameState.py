@@ -18,8 +18,10 @@ class GameState:
         player = arialFont.render("Player: ", 1, (0, 255, 0))
         screen.blit(player, (0, 0))
 
-        rhombus = Rhombus()
-        rhombus.create(screen, (0,0,0), (400,100))
+        rhH = 25
+        rhW = 40
+        rhombus = Rhombus(rhH, rhW)
+        rhombus.create(screen, (0,0,255), (width // 2 + 1 - rhW, 200))
 
         pygame.display.flip()
 

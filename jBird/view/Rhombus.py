@@ -3,8 +3,9 @@ from pygame import gfxdraw
 
 class Rhombus:
     def __init__(self, h = 5, w = 10):
-        self.h = 30
-        self.w = 50
+        self.h = h
+        self.w = w
+        self.listOfCoordinates = []
 
     def create(self, screen, color, leftCoordinates):
         screen = self.draw_rhombus(screen, color, leftCoordinates)
@@ -13,7 +14,15 @@ class Rhombus:
         upCoordinate = [leftCoordinate[0] + self.w, leftCoordinate[1] - self.h]
         downCoordinate = [leftCoordinate[0] + self.w, leftCoordinate[1] + self.h]
         rightCoordinate = [leftCoordinate[0] + self.w * 2, leftCoordinate[1]]
-        listOfCoordinates = [leftCoordinate, upCoordinate, rightCoordinate, downCoordinate]
-        pygame.gfxdraw.filled_polygon(screen, listOfCoordinates, (255,0,0))
+        self.listOfCoordinates = [leftCoordinate, upCoordinate, rightCoordinate, downCoordinate]
+
+        pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, color)
+
         return screen
+
+    def changeColor(self, color):
+        pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, color)
+        return screen
+
+
 
