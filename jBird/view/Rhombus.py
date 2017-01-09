@@ -10,15 +10,11 @@ class Rhombus:
         self.listOfCoordinates = tile.coordinates
         self.color = TileColor.START_COLOR.value
 
-
     def draw_rhombus(self, screen):
         pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, self.color)
 
         return screen
 
-    def changeColor(self, screen, color):
-        pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, color)
-        return screen
-
-
-
+    def changeColor(self, color):
+        self.color = color
+        # pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, color)
