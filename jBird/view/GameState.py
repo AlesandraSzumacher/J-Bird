@@ -2,7 +2,6 @@ import pygame
 import pygame.constants
 from pygame.constants import MOUSEBUTTONDOWN
 
-from jBird.control import TileControl
 from jBird.logic.Game import Game
 from jBird.utils.ScreenSize import ScreenSize, TileColor
 from jBird.view.BoardDisplayer import BoardDisplay
@@ -40,14 +39,19 @@ class GameState:
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == MOUSEBUTTONDOWN:
+                    for tile in boardDis.tileRhombusList:
+                        if tile.tile.pressed(pygame.mouse.get_pos()):
+                            tile.changeColor((0,255,0))
+                            break
+                    '''
                     for i in range(len(boardDis.tileRhombusList)):
                         if boardDis.tileRhombusList[i].tile.pressed(pygame.mouse.get_pos()):
-                            boardDis.tileRhombusList[i].changeColor((0, 0, 0))
-
-                            boardDis.displayBoard(screen)
-                            pygame.display.flip()
-                            print("done")
+                            boardDis.tileRhombusList[i].changeColor((0, 255, 0))
                             break
+                    '''
+                    boardDis.displayBoard(screen)
+                    pygame.display.flip()
+                    print("done")
 
 
 GameState()

@@ -11,10 +11,12 @@ class Rhombus:
         self.color = TileColor.START_COLOR.value
 
     def draw_rhombus(self, screen):
+        print(self.color)
         pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, self.color)
 
         return screen
 
     def changeColor(self, color):
         self.color = color
+        # print(self.color)
         # pygame.gfxdraw.filled_polygon(screen, self.listOfCoordinates, color)

@@ -8,5 +8,5 @@ class BoardDisplay:
 
     def displayBoard(self, screen):
         for tile in self.tileRhombusList:
-            tile.draw_rhombus(screen)
+            screen = tile.draw_rhombus(screen)
         return screen
