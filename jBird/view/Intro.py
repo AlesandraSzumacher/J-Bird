@@ -46,4 +46,4 @@ class Intro:
                     if button1.pressed(pygame.mouse.get_pos()):
                         newGameState = GameState()
 
-intro = Intro()
+# intro = Intro()
