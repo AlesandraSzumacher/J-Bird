@@ -9,7 +9,6 @@ class Tile:
         self.countCoordinates()
         self.tileControl = TileControl()
 
-
     def countCoordinates(self):
         self.coordinates.append([self.center[0] - BoardSize.TILE_WIDTH.value // 2,
                                  self.center[1]])
