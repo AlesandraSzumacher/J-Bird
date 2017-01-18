@@ -19,7 +19,7 @@ class Intro:
         myFont = pygame.font.SysFont("arial", 80)
         mainTextLabel = myFont.render("J-BIRD", 1, (0, 255, 0))
 
-        imageJBird = pygame.image.load("jbird.png")
+        imageJBird = pygame.image.load("jbirdnapis.png")
         screen.blit(imageJBird, (10, 20))
 
         screen.blit(mainTextLabel, (520, 20))
@@ -35,11 +35,11 @@ class Intro:
 
         running = True
         while running:
-            for event in pygame.event.get():
+            '''for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == MOUSEBUTTONDOWN:
                     if button1.pressed(pygame.mouse.get_pos()):
                         newGameState = GameState()
-
+            '''
 intro = Intro()

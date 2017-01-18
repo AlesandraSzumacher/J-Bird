@@ -39,7 +39,7 @@ class GameState:
         boardDis.displayBoard(screen)
 
         chicken = Chicken()
-        chicken_image = pygame.image.load("kurczak.jpg")
+        chicken_image = pygame.image.load("k2.png")
 
 
         screen.blit(chicken_image, chicken.position)
@@ -61,6 +61,10 @@ class GameState:
                         # przyciag do środka pierwszej płytki
                         direction = "DOWN"
                         chicken.move(direction)
+
+                        screen.fill(background_colour)
+                        boardDis.displayBoard(screen)
+                        screen.blit(player_label, (0, 0))
                         screen.blit(chicken_image, chicken.position)
                         pygame.display.flip()
 
@@ -71,4 +75,4 @@ class GameState:
                 #   print("done")
 
 
-GameState()
+# GameState()
