@@ -29,5 +29,9 @@ class WallColor(Enum):
     LEFT_WALL_COLOR = (255, 0, 0)
     RIGHT_WALL_COLOR = (0, 0, 255)
 
+class Positions(Enum):
+    CHICKEN_INIT_POSITION = [ScreenSize.WIDTH.value / 2 - 30, 10]
+    BOARD_DOWN = 150
+
 
 

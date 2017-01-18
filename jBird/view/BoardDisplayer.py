@@ -13,5 +13,4 @@ class BoardDisplay:
         for tile in self.tileRhombusList:
             screen = tile.draw_rhombus(screen)
 
-
         return screen
