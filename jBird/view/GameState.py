@@ -37,7 +37,7 @@ class GameState:
         screen.fill(background_colour)
 
         arialFont = pygame.font.SysFont("arial", 40)
-        player_label = arialFont.render("Player: ", 1, (0, 255, 0))
+        player_label = arialFont.render("Player: ", 1, (95, 27, 84))
         screen.blit(player_label, (0, 0))
 
         boardDis = BoardDisplay(game.board)
@@ -61,6 +61,8 @@ class GameState:
                 if e.type == QUIT:
                     sys.exit(0)
                 elif e.type == KEYDOWN:
+                    chicken.save_prev_position()
+
                     if e.key == K_KP1 and chicken.level == -1:
                         chicken.level = 0
                         currentTile = game.board.listOfTiles[0]
@@ -106,17 +108,18 @@ class GameState:
                             chicken.level -= 1
                             chicken.move_down(next_tiles_up[1])
 
-                    if game.board.if_tile_is_in_board(chicken.tile_center):
-                        screen.fill(background_colour)
-                        boardDis.displayBoard(screen)
-                        screen.blit(player_label, (0, 0))
-                        screen.blit(chicken_image, chicken.position)
-                        pygame.display.flip()
+                    if not game.board.if_tile_is_in_board(chicken.tile_center):
+                        chicken.reset_change()
 
+                    screen.fill(background_colour)
+                    boardDis.displayBoard(screen)
+                    screen.blit(player_label, (0, 0))
+                    screen.blit(chicken_image, chicken.position)
+                    pygame.display.flip()
 
 5
                         #boardDis.displayBoard(screen)
                 #pygame.display.flip()
                 #   print("done")
 
-# GameState()
+GameState()
