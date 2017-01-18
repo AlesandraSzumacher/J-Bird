@@ -106,14 +106,16 @@ class GameState:
                             chicken.level -= 1
                             chicken.move_down(next_tiles_up[1])
 
+                    if game.board.if_tile_is_in_board(chicken.tile_center):
+                        screen.fill(background_colour)
+                        boardDis.displayBoard(screen)
+                        screen.blit(player_label, (0, 0))
+                        screen.blit(chicken_image, chicken.position)
+                        pygame.display.flip()
 
-                    screen.fill(background_colour)
-                    boardDis.displayBoard(screen)
-                    screen.blit(player_label, (0, 0))
-                    screen.blit(chicken_image, chicken.position)
-                    pygame.display.flip()
 
-                #boardDis.displayBoard(screen)
+
+                        #boardDis.displayBoard(screen)
                 #pygame.display.flip()
                 #   print("done")
 
