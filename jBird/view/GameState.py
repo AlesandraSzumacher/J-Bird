@@ -25,16 +25,18 @@ class GameState:
         arialFont = pygame.font.SysFont("arial", 40)
         player = arialFont.render("Player: ", 1, (0, 255, 0))
         screen.blit(player, (0, 0))
-        '''
-        rhH = 25
-        rhW = 40
-        rhombus = Rhombus(rhH, rhW)
-        rhombus.create(screen, (0,0,255), (width // 2 + 1 - rhW, 200))
-        '''
-        boardDis = BoardDisplay(game.board)
 
+        boardDis = BoardDisplay(game.board)
         boardDis.displayBoard(screen)
+
+        chicken = pygame.image.load("kurczak.jpg")
+        chicken_possition = [100, 100]
+
+        screen.blit(chicken, chicken_possition)
+
         pygame.display.flip()
+
+
 
         running = True
         while running:
