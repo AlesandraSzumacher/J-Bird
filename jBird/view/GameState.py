@@ -5,6 +5,7 @@ from pygame.constants import KEYDOWN
 from pygame.constants import K_DOWN
 from pygame.constants import K_KP0
 from pygame.constants import K_KP1
+from pygame.constants import K_KP2
 
 from pygame.constants import MOUSEBUTTONDOWN
 from pygame.constants import QUIT
@@ -62,18 +63,30 @@ class GameState:
                         print("w doł")
 
                         # przyciag do środka pierwszej płytki
-                        chicken.direction = "DOWN"
+                        chicken.direction = "1_LEVEL_DOWN"
                         currentTile = game.board.listOfTiles[0]
-                        chicken.move_down(currentTile)
+                        chicken.move_down_tile(currentTile)
+
+                    elif chicken.direction == "1_LEVEL_DOWN":
+                        current_tile_center = chicken.tile_center
+                        left_next_tiles = game.board.countTwoDownTiles(current_tile_center)[0]
+                        right_next_tiles = game.board.countTwoDownTiles(current_tile_center)[1]
+                        if e.key == K_KP1:
+                            print("olaaaa")
+                            chicken.direction = "2_LEVEL_DOWN"
+                            chicken.move_down(left_next_tiles)
+                        elif K_KP2 == e.key:
+                            print("olaaaa")
+                            chicken.direction = "2_LEVEL_DOWN"
+                            chicken.move_down(right_next_tiles)
 
 
 
-
-                        screen.fill(background_colour)
-                        boardDis.displayBoard(screen)
-                        screen.blit(player_label, (0, 0))
-                        screen.blit(chicken_image, chicken.position)
-                        pygame.display.flip()
+                    screen.fill(background_colour)
+                    boardDis.displayBoard(screen)
+                    screen.blit(player_label, (0, 0))
+                    screen.blit(chicken_image, chicken.position)
+                    pygame.display.flip()
 
                     print("cos")
 
