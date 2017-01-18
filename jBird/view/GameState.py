@@ -3,6 +3,8 @@ import pygame.constants
 import sys
 from pygame.constants import KEYDOWN
 from pygame.constants import K_DOWN
+from pygame.constants import K_KP0
+from pygame.constants import K_KP1
 
 from pygame.constants import MOUSEBUTTONDOWN
 from pygame.constants import QUIT
@@ -39,7 +41,7 @@ class GameState:
         boardDis.displayBoard(screen)
 
         chicken = Chicken()
-        chicken_image = pygame.image.load("k2.png")
+        chicken_image = pygame.image.load("kurczaczunio.png")
 
 
         screen.blit(chicken_image, chicken.position)
@@ -52,15 +54,20 @@ class GameState:
 
         while running:
             for e in pygame.event.get():
+                currentTile = 0
                 if e.type == QUIT:
                     sys.exit(0)
                 elif e.type == KEYDOWN:
-                    if e.key == K_DOWN and chicken.direction == "INIT DOWN":
+                    if e.key == K_KP1 and chicken.direction == "INIT DOWN":
                         print("w doł")
 
                         # przyciag do środka pierwszej płytki
-                        direction = "DOWN"
-                        chicken.move(direction)
+                        chicken.direction = "DOWN"
+                        currentTile = game.board.listOfTiles[0]
+                        chicken.move_down(currentTile)
+
+
+
 
                         screen.fill(background_colour)
                         boardDis.displayBoard(screen)
@@ -74,5 +81,4 @@ class GameState:
                 #pygame.display.flip()
                 #   print("done")
 
-
-# GameState()
+GameState()

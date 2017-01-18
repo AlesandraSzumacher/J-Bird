@@ -29,4 +29,19 @@ class Board:
         return self.listOfTiles
 
 
+    def countNextDownTiles(self, center):
+        leftNextCenter = [center[0] - BoardSize.TILE_WIDTH.value // 2,
+                          center[1] - BoardSize.TILE_HEIGHT.value // 2 - BoardSize.CUBE_BREAK_HEIGHT.value]
+        rightNextCenter = [center[0] + BoardSize.TILE_WIDTH.value // 2,
+                           center[1] - BoardSize.TILE_HEIGHT.value // 2 - BoardSize.CUBE_BREAK_HEIGHT.value]
+        return (leftNextCenter, rightNextCenter)
+
+
+    def countTwoUpTiles(self, center):
+        leftNextCenter = [center[0] - BoardSize.TILE_WIDTH.value // 2,
+                          center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value]
+        rightNextCenter = [center[0] + BoardSize.TILE_WIDTH.value // 2,
+                           center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value]
+        return (leftNextCenter, rightNextCenter)
+
 Board([601, 100])

@@ -35,11 +35,11 @@ class Intro:
 
         running = True
         while running:
-            '''for event in pygame.event.get():
+            for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == MOUSEBUTTONDOWN:
                     if button1.pressed(pygame.mouse.get_pos()):
                         newGameState = GameState()
-            '''
-intro = Intro()
+
+# intro = Intro()
