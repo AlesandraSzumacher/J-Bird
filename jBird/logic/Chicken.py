@@ -6,7 +6,7 @@ from jBird.utils.ScreenSize import Positions
 class Chicken():
     def __init__(self):
         self.position = Positions.CHICKEN_INIT_POSITION.value
-        self.direction = "INIT DOWN"
+        self.level = -1
         self.feet_coords = [41, 78]
         self.tile_center = 0
 
