@@ -3,13 +3,18 @@ import pygame.constants
 import sys
 from pygame.constants import KEYDOWN
 from pygame.constants import K_DOWN
+from pygame.constants import K_KP0
+from pygame.constants import K_KP1
+from pygame.constants import K_KP2
+from pygame.constants import K_KP4
+from pygame.constants import K_KP5
 
 from pygame.constants import MOUSEBUTTONDOWN
 from pygame.constants import QUIT
 
 from jBird.logic.Chicken import Chicken
 from jBird.logic.Game import Game
-from jBird.utils.ScreenSize import ScreenSize, TileColor, PlayerPos, Positions
+from jBird.utils.ScreenSize import ScreenSize, TileColor, PlayerPos, Positions, BoardSize
 from jBird.view.BoardDisplayer import BoardDisplay
 
 pygame.init()
@@ -39,7 +44,7 @@ class GameState:
         boardDis.displayBoard(screen)
 
         chicken = Chicken()
-        chicken_image = pygame.image.load("k2.png")
+        chicken_image = pygame.image.load("kurczaczunio.png")
 
 
         screen.blit(chicken_image, chicken.position)
@@ -52,27 +57,64 @@ class GameState:
 
         while running:
             for e in pygame.event.get():
+                currentTile = 0
                 if e.type == QUIT:
                     sys.exit(0)
                 elif e.type == KEYDOWN:
-                    if e.key == K_DOWN and chicken.direction == "INIT DOWN":
-                        print("w doł")
+                    if e.key == K_KP1 and chicken.level == -1:
+                        chicken.level = 0
+                        currentTile = game.board.listOfTiles[0]
+                        chicken.move_down_tile(currentTile)
 
-                        # przyciag do środka pierwszej płytki
-                        direction = "DOWN"
-                        chicken.move(direction)
+                    elif chicken.level == 0:
+                        current_tile_center = chicken.tile_center
+                        left_next_tiles = game.board.countTwoDownTiles(current_tile_center)[0]
+                        right_next_tiles = game.board.countTwoDownTiles(current_tile_center)[1]
 
-                        screen.fill(background_colour)
-                        boardDis.displayBoard(screen)
-                        screen.blit(player_label, (0, 0))
-                        screen.blit(chicken_image, chicken.position)
-                        pygame.display.flip()
+                        if e.key == K_KP1:
+                            chicken.level = 1
+                            chicken.move_down(left_next_tiles)
+                        elif K_KP2 == e.key:
+                            chicken.level = 1
+                            chicken.move_down(right_next_tiles)
 
-                    print("cos")
+                    elif chicken.level != BoardSize.LEVELS_NUMBER.value - 1:
+                        current_tile_center = chicken.tile_center
+                        next_tiles_down = game.board.countTwoDownTiles(current_tile_center)
+                        next_tiles_up = game.board.countNextUpTiles(current_tile_center)
+
+                        if e.key == K_KP1:
+                            chicken.level += 1
+                            chicken.move_down(next_tiles_down[0])
+                        elif K_KP2 == e.key:
+                            chicken.level += 1
+                            chicken.move_down(next_tiles_down[1])
+                        elif e.key == K_KP4:
+                            chicken.level -= 1
+                            chicken.move_down(next_tiles_up[0])
+                        elif K_KP5 == e.key:
+                            chicken.level -= 1
+                            chicken.move_down(next_tiles_up[1])
+
+                    elif chicken.level == BoardSize.LEVELS_NUMBER.value - 1:
+                        current_tile_center = chicken.tile_center
+                        next_tiles_up = game.board.countNextUpTiles(current_tile_center)
+                        if e.key == K_KP4:
+                            chicken.level -= 1
+                            chicken.move_down(next_tiles_up[0])
+                        elif K_KP5 == e.key:
+                            chicken.level -= 1
+                            chicken.move_down(next_tiles_up[1])
+
+
+                    screen.fill(background_colour)
+                    boardDis.displayBoard(screen)
+                    screen.blit(player_label, (0, 0))
+                    screen.blit(chicken_image, chicken.position)
+                    pygame.display.flip()
 
                 #boardDis.displayBoard(screen)
                 #pygame.display.flip()
                 #   print("done")
 
-
-# GameState()
+GameState()
