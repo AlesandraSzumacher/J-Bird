@@ -44,4 +44,11 @@ class Board:
                            center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value]
         return (leftNextCenter, rightNextCenter)
 
+    def if_tile_is_in_board(self, center):
+        for tile in self.listOfTiles:
+            if tile.center[0] == center[0] and tile.center[1] == center[1]:
+                print("tak jest płytka")
+                return True
+
+        return False
 Board([601, 100])
