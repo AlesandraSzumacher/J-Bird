@@ -1,6 +1,7 @@
 import pygame
 
 from jBird.logic.Board import Board
+from jBird.utils.ScreenSize import ScreenSize, Positions
 
 
 class Game(object):
@@ -9,7 +10,7 @@ class Game(object):
         """Initializing new Game."""
         self.level = 1
         self.round = 1
-        self.board = Board([601, 100])
+        self.board = Board([ScreenSize.WIDTH.value//2, Positions.BOARD_DOWN.value])
 
     def next_level(self):
         """Changing level into next."""
