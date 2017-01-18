@@ -47,7 +47,6 @@ class Board:
     def if_tile_is_in_board(self, center):
         for tile in self.listOfTiles:
             if tile.center[0] == center[0] and tile.center[1] == center[1]:
-                print("tak jest płytka")
                 return True
 
         return False
