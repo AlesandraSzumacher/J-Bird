@@ -1,10 +1,12 @@
+import sys
+
 import pygame
 from pygame.constants import MOUSEBUTTONDOWN
 
 from jBird.utils.ScreenSize import ScreenSize
-from jBird.view import Buttons
-from jBird.view.GameState import GameState
-import sys
+from jBird.view.entities_and_widgets import Buttons
+from jBird.view.states.GameState import GameState
+
 pygame.init()
 
 class Intro:
@@ -16,18 +18,9 @@ class Intro:
         background_colour = (0, 0, 0)
         screen.fill(background_colour)
 
-        # myFont = pygame.font.SysFont("lklug", 80)
-        # mainTextLabel = myFont.render("J-BIRD", 1, (0, 255, 0))
-
         imageJBird = pygame.image.load("jbirdnapis.png")
         imageJBirdWidth = imageJBird.get_rect().size[0]
         screen.blit(imageJBird, (width/2 - imageJBirdWidth/2, 20))
-
-        # screen.blit(mainTextLabel, (520, 20))
-
-        # inputTextBox = InputText("Name")
-        # [screen, textFromBox] = inputTextBox.ask(screen)
-
 
         button1 = Buttons.Button()
         button1height = 200
@@ -45,4 +38,4 @@ class Intro:
                 elif event.type == MOUSEBUTTONDOWN:
                     if button1.pressed(pygame.mouse.get_pos()):
                         newGameState = GameState()
-# intro = Intro()
+intro = Intro()

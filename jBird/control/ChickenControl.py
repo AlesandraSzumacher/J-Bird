@@ -3,11 +3,12 @@ from pygame.constants import K_KP2
 from pygame.constants import K_KP4
 from pygame.constants import K_KP5
 
-from jBird.utils.ScreenSize import BoardSize
-
 
 class ChickenControl():
+    """Containing methods to move the chicken on the board."""
+
     def moveChicken(self, chicken, keyPressed, board):
+        """Allows to move the chicken - uses methods moveChickenDown and moveChickenUp."""
         if chicken.level == -1:
             if keyPressed == K_KP1 or keyPressed == K_KP2:
                 # kurczak rusza sie na pierwsza plytke w dol
@@ -20,6 +21,7 @@ class ChickenControl():
             self.moveChickenUp(chicken, keyPressed, board)
 
     def moveChickenDown(self, chicken, keyPressed, board):
+        """Allows to move the chicken down - left or right."""
         possible_move_down = board.countTwoDownTiles(chicken.tile_center)
         choose_move = [0, 0]
         if keyPressed == K_KP1:
@@ -32,6 +34,7 @@ class ChickenControl():
             chicken.level += 1
 
     def moveChickenUp(self, chicken, keyPressed, board):
+        """Allows to move the chicken up - left or right."""
         possible_move_down = board.countNextUpTiles(chicken.tile_center)
         choose_move = [0, 0]
         if keyPressed == K_KP4:

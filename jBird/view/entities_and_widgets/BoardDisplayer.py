@@ -1,4 +1,4 @@
-from jBird.view.TilePolygon import TilePolygon
+from jBird.view.entities_and_widgets.TilePolygon import TilePolygon
 
 
 class BoardDisplay:

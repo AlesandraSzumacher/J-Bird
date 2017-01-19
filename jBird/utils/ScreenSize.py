@@ -22,11 +22,11 @@ class BoardSize(Enum):
 
 class TileColor(Enum):
     START_COLOR = (255, 255, 168)
-    TOUCH_COLOR = (0, 255, 0)
+    TOUCH_COLOR = (255, 0, 0)
 
 
 class WallColor(Enum):
-    LEFT_WALL_COLOR = (0, 0, 0)
+    LEFT_WALL_COLOR = (0, 0, 30)
     RIGHT_WALL_COLOR = (166, 41, 79)
 
 

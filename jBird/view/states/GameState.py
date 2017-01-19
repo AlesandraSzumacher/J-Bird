@@ -1,6 +1,7 @@
+import sys
+
 import pygame
 import pygame.constants
-import sys
 from pygame.constants import KEYDOWN
 from pygame.constants import QUIT
 
@@ -8,8 +9,8 @@ from jBird.control.ChickenControl import ChickenControl
 from jBird.control.TileControl import TileControl
 from jBird.logic.Chicken import Chicken
 from jBird.logic.Game import Game
-from jBird.utils.ScreenSize import ScreenSize, TileColor, PlayerPos, Positions, BoardSize
-from jBird.view.BoardDisplayer import BoardDisplay
+from jBird.utils.ScreenSize import ScreenSize
+from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
 
 pygame.init()
 
@@ -31,7 +32,7 @@ class GameState:
         boardDis.displayBoard(screen)
 
         chicken = Chicken()
-        chicken_image = pygame.image.load("kurczaczunio.png")
+        chicken_image = pygame.image.load("chickenFront.png")
 
         screen.blit(chicken_image, chicken.position)
 
@@ -58,9 +59,4 @@ class GameState:
 
                     screen.blit(chicken_image, chicken.getPosition())
                     pygame.display.flip()
-
-
-
-
-
-GameState()
+5
