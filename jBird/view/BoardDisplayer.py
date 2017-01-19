@@ -1,11 +1,11 @@
-from jBird.view.Polygon import Polygon
+from jBird.view.TilePolygon import TilePolygon
 
 
 class BoardDisplay:
     def __init__(self, board):
         self.board = board
-        self.tileRhombusList = [Polygon(tile) for tile in self.board.listOfTiles]
-        self.cubeWallsList = [Polygon(wall, wall.color) for wall in self.board.listOfCubeWalls]
+        self.tileRhombusList = [TilePolygon(tile) for tile in self.board.listOfTiles]
+        self.cubeWallsList = [TilePolygon(wall, wall.color) for wall in self.board.listOfCubeWalls]
 
     def displayBoard(self, screen):
         for wall in self.cubeWallsList:

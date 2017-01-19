@@ -4,7 +4,7 @@ from pygame import gfxdraw
 from jBird.utils.ScreenSize import TileColor
 
 
-class Polygon:
+class TilePolygon:
     def __init__(self, tile, color=TileColor.START_COLOR.value):
         self.tile = tile
         self.listOfCoordinates = tile.coordinates

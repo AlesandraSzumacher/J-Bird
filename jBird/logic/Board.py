@@ -48,6 +48,14 @@ class Board:
         for tile in self.listOfTiles:
             if tile.center[0] == center[0] and tile.center[1] == center[1]:
                 return True
-
         return False
+
+    def return_tile_from_board(self, center):
+        for tile in self.listOfTiles:
+            if tile.center[0] == center[0] and tile.center[1] == center[1]:
+                return tile
+        return None
+
+
+
 Board([601, 100])

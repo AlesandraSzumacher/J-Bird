@@ -14,13 +14,10 @@ class ChickenControl():
                 chicken.setTileCenter(board.listOfTiles[0].center)
                 chicken.level = 0
             else:
-                return chicken
-        chicken = self.moveChickenDown(chicken, keyPressed, board)
-        chicken = self.moveChickenUp(chicken, keyPressed, board)
-
-
-
-        return chicken
+                return
+        else:
+            self.moveChickenDown(chicken, keyPressed, board)
+            self.moveChickenUp(chicken, keyPressed, board)
 
     def moveChickenDown(self, chicken, keyPressed, board):
         possible_move_down = board.countTwoDownTiles(chicken.tile_center)
@@ -34,8 +31,6 @@ class ChickenControl():
             chicken.setTileCenter(choose_move)
             chicken.level += 1
 
-        return chicken
-
     def moveChickenUp(self, chicken, keyPressed, board):
         possible_move_down = board.countNextUpTiles(chicken.tile_center)
         choose_move = [0, 0]
@@ -47,5 +42,3 @@ class ChickenControl():
         if board.if_tile_is_in_board(choose_move):
             chicken.setTileCenter(choose_move)
             chicken.level -= 1
-
-        return chicken

@@ -1,4 +1,4 @@
-from jBird.utils.ScreenSize import BoardSize
+from jBird.utils.ScreenSize import BoardSize, TileColor
 
 
 class TileControl:
@@ -10,3 +10,9 @@ class TileControl:
             return True
         else:
             return False
+
+    def changeColor(self, tile, boardDisplay):
+        for tileRomb in boardDisplay.tileRhombusList:
+            if tileRomb.tile.center == tile.center:
+                tileRomb.changeColor(TileColor.TOUCH_COLOR.value)
+

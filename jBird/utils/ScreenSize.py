@@ -22,12 +22,13 @@ class BoardSize(Enum):
 
 class TileColor(Enum):
     START_COLOR = (255, 255, 168)
-    TOUCH_COLOR = (0, 0, 0)
+    TOUCH_COLOR = (0, 255, 0)
 
 
 class WallColor(Enum):
     LEFT_WALL_COLOR = (0, 0, 0)
     RIGHT_WALL_COLOR = (166, 41, 79)
+
 
 class Positions(Enum):
     CHICKEN_INIT_POSITION = [ScreenSize.WIDTH.value / 2 - 30, 10]
