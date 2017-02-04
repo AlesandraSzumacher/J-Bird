@@ -10,7 +10,7 @@ class Board:
         self.listOfTiles = []
         self.listOfCubeWalls = []
         self.addTile(firstCenter, 0)
-        self.numberOfTouchTiles = 0
+        self.numberOfTouchedTiles = 0
 
     def addTile(self, firstCenter, level):
         """Setting the Tiles on the board."""
@@ -65,3 +65,10 @@ class Board:
                 return tile
         return None
 
+    def increaseNumberOfTouchedTiles(self):
+        """Increasing the number of tiles which were touched."""
+        self.numberOfTouchedTiles += 1
+
+    def decreaseNumberOfTouchedTiles(self):
+        """Decreasing the number of tiles which were touched."""
+        self.numberOfTouchedTiles -= 1

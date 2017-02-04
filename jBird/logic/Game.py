@@ -35,6 +35,7 @@ class Game(object):
         self.chicken.setTileCenter(move)
 
         tile = self.board.return_tile_from_board(self.chicken.tile_center)
+        if tile.change_state():
+            self.board.increaseNumberOfTouchedTiles()
 
         return tile
-

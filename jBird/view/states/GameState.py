@@ -28,8 +28,12 @@ class GameState:
         arialFont = pygame.font.SysFont("arial", 40)
         player_label = arialFont.render("Player: " + str(game.player.nick), 1, (95, 27, 84))
         level_label = arialFont.render("Level: " + str(game.level), 1, (95, 27, 84))
+        points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
+
         screen.blit(player_label, (0, 0))
         screen.blit(level_label, (0, 50))
+        screen.blit(points_label, (0, 100))
+
 
         boardDis = BoardDisplay(game.board)
         boardDis.displayBoard(screen)
@@ -68,6 +72,9 @@ class GameState:
                     boardDis.displayBoard(screen)
                     screen.blit(player_label, (0, 0))
                     screen.blit(level_label, (0, 50))
+
+                    points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
+                    screen.blit(points_label, (0, 100))
 
                     screen.blit(chicken_image, chicken.getPosition())
                     pygame.display.flip()

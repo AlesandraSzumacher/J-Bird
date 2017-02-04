@@ -26,8 +26,11 @@ class Tile:
         return self.tileControl.pressed(self.center, mouse)
 
     def change_state(self):
+        """Changes state of tile and returns if succeed."""
         if self.state == TilesState.NOT_TOUCHED.value:
             self.state = TilesState.TOUCHED.value
+            return True
+        return False
 
 
 
