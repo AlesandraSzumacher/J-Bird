@@ -4,12 +4,13 @@ import pygame
 import pygame.constants
 from pygame.constants import KEYDOWN
 from pygame.constants import QUIT
+from pygame.time import Clock
 
 from jBird.control.ChickenControl import ChickenControl
 from jBird.control.TileControl import TileControl
 from jBird.logic.Chicken import Chicken
 from jBird.logic.Game import Game
-from jBird.utils.Constants import ScreenSize
+from jBird.utils.Constants import ScreenSize, Positions
 from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
 
 pygame.init()
@@ -29,27 +30,31 @@ class GameState:
         player_label = arialFont.render("Player: " + str(game.player.nick), 1, (95, 27, 84))
         level_label = arialFont.render("Level: " + str(game.level), 1, (95, 27, 84))
         points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
+        hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
 
         screen.blit(player_label, (0, 0))
         screen.blit(level_label, (0, 50))
         screen.blit(points_label, (0, 100))
-
+        screen.blit(hp_label, (0, 150))
 
         boardDis = BoardDisplay(game.board)
         boardDis.displayBoard(screen)
 
-        chicken = Chicken()
         chicken_image = pygame.image.load("chickenFront.png")
+        ball_image = pygame.image.load("ball.png")
 
-        screen.blit(chicken_image, chicken.position)
+        screen.blit(chicken_image, game.chicken.position)
+        game.add_villain()
+        screen.blit(ball_image, game.list_of_villains[0].get_position())
 
         pygame.display.flip()
 
+        clock = Clock()
         running = True
 
         while running:
-            for e in pygame.event.get():
 
+            for e in pygame.event.get():
                 if e.type == QUIT:
                     sys.exit(0)
                 elif e.type == KEYDOWN:
@@ -61,8 +66,15 @@ class GameState:
 
                     tile, if_win = game.handle_level(possible_move)
 
-                    tileControl = TileControl()
-                    tileControl.changeColor(tile, boardDis)
+                    if tile == "NO_MORE_HP":
+                        sys.exit(0)
+
+                    if tile == "ONE_HP_LOST":
+                        game.move_chicken_to_start_position()
+                    else:
+
+                        tileControl = TileControl()
+                        tileControl.changeColor(tile, boardDis)
 
                     # tile = game.board.return_tile_from_board(game.chicken.tile_center)
                     # tileControl = TileControl()
@@ -76,9 +88,11 @@ class GameState:
                     points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
                     screen.blit(points_label, (0, 100))
 
-                    screen.blit(chicken_image, chicken.getPosition())
+                    hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
+                    screen.blit(hp_label, (0, 150))
+                    print("jeszcze raz pozycja ", game.chicken.getPosition())
+                    screen.blit(chicken_image, game.chicken.getPosition())
                     pygame.display.flip()
 
                     if if_win:
-                        print("jabadabadoooooooo")
                         sys.exit(0)

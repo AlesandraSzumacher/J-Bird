@@ -14,7 +14,14 @@ class Board:
 
     def addTile(self, firstCenter, level):
         """Setting the Tiles on the board."""
-        self.listOfTiles.append(Tile(firstCenter[0], firstCenter[1]))
+        is_in_list = False
+        for t in self.listOfTiles:
+            if t.center[0] == firstCenter[0] and t.center[1] == firstCenter[1]:
+                is_in_list = True
+
+        if not is_in_list:
+            self.listOfTiles.append(Tile(firstCenter[0], firstCenter[1]))
+
         self.listOfCubeWalls.append(CubeWallLeft(firstCenter))
         self.listOfCubeWalls.append(CubeWallRight(firstCenter))
 

@@ -25,3 +25,9 @@ class Chicken():
 
     def getPosition(self):
         return self.position
+
+    def move_to_start_position(self):
+        self.position = [570, 10]
+        self.level = -1
+        self.tile_center = [570, 10]
+
