@@ -1,3 +1,4 @@
+import sys
 from pygame.constants import K_1
 from pygame.constants import K_EQUALS
 from pygame.constants import K_KP1
@@ -38,6 +39,8 @@ class ChickenControl():
         if board.if_tile_is_in_board(choose_move):
             chicken.setTileCenter(choose_move)
             chicken.level += 1
+        elif keyPressed in [K_KP1, K_w, K_KP3, K_p]:
+            return sys.exit(0)
 
     def moveChickenUp(self, chicken, keyPressed, board):
         """Allows to move the chicken up - left or right."""
@@ -51,3 +54,6 @@ class ChickenControl():
         if board.if_tile_is_in_board(choose_move):
             chicken.setTileCenter(choose_move)
             chicken.level -= 1
+        elif keyPressed in [K_KP7, K_1, K_KP9, K_EQUALS]:
+            return sys.exit(0)
+
