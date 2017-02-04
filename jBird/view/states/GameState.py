@@ -59,7 +59,7 @@ class GameState:
                     if possible_move is None:
                         continue
 
-                    tile = game.handle_level(possible_move)
+                    tile, if_win = game.handle_level(possible_move)
 
                     tileControl = TileControl()
                     tileControl.changeColor(tile, boardDis)
@@ -78,3 +78,7 @@ class GameState:
 
                     screen.blit(chicken_image, chicken.getPosition())
                     pygame.display.flip()
+
+                    if if_win:
+                        print("jabadabadoooooooo")
+                        sys.exit(0)

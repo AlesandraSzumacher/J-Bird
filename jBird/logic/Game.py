@@ -6,6 +6,7 @@ from jBird.logic.Board import Board
 from jBird.logic.Chicken import Chicken
 from jBird.logic.Player import Player
 from jBird.utils.Constants import ScreenSize, Positions
+from jBird.utils.LevelsUtils import NumberOfTiles
 
 
 class Game(object):
@@ -38,4 +39,7 @@ class Game(object):
         if tile.change_state():
             self.board.increaseNumberOfTouchedTiles()
 
-        return tile
+        if self.board.numberOfTouchedTiles == NumberOfTiles.LEVEL_1.value:
+            return [tile, True]
+
+        return [tile, False]
