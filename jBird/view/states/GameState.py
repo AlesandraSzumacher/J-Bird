@@ -59,4 +59,3 @@ class GameState:
 
                     screen.blit(chicken_image, chicken.getPosition())
                     pygame.display.flip()
-5
