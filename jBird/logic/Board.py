@@ -1,6 +1,6 @@
 from jBird.logic.CubeWall import CubeWallLeft, CubeWallRight
 from jBird.logic.Tile import Tile
-from jBird.utils.ScreenSize import BoardSize
+from jBird.utils.Constants import BoardSize
 
 
 class Board:

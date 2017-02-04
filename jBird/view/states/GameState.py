@@ -9,10 +9,11 @@ from jBird.control.ChickenControl import ChickenControl
 from jBird.control.TileControl import TileControl
 from jBird.logic.Chicken import Chicken
 from jBird.logic.Game import Game
-from jBird.utils.ScreenSize import ScreenSize
+from jBird.utils.Constants import ScreenSize
 from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
 
 pygame.init()
+
 
 class GameState:
     def __init__(self):
@@ -59,4 +60,3 @@ class GameState:
 
                     screen.blit(chicken_image, chicken.getPosition())
                     pygame.display.flip()
-5

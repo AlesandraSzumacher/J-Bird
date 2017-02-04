@@ -1,4 +1,4 @@
-from jBird.utils.ScreenSize import BoardSize, TileColor
+from jBird.utils.Constants import BoardSize, TileColor
 
 
 class TileControl:

@@ -1,7 +1,7 @@
 import pygame
 from pygame import gfxdraw
 
-from jBird.utils.ScreenSize import TileColor
+from jBird.utils.Constants import TileColor
 
 
 class TilePolygon:

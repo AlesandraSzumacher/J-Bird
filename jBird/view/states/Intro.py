@@ -3,7 +3,7 @@ import sys
 import pygame
 from pygame.constants import MOUSEBUTTONDOWN
 
-from jBird.utils.ScreenSize import ScreenSize
+from jBird.utils.Constants import ScreenSize
 from jBird.view.entities_and_widgets import Buttons
 from jBird.view.states.GameState import GameState
 
@@ -38,4 +38,5 @@ class Intro:
                 elif event.type == MOUSEBUTTONDOWN:
                     if button1.pressed(pygame.mouse.get_pos()):
                         newGameState = GameState()
+
 intro = Intro()

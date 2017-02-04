@@ -1,5 +1,5 @@
 from jBird.control.TileControl import TileControl
-from jBird.utils.ScreenSize import BoardSize
+from jBird.utils.Constants import BoardSize
 
 
 class Tile:
