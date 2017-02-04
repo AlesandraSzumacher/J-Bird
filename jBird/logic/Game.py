@@ -34,11 +34,11 @@ class Game(object):
 
     def handle_level(self, move):
         if_correct_move = self.board.if_tile_is_in_board(move)
+
         if if_correct_move is False:
             self.player.hp -= 1
             if self.player.hp < 0:
                 return ["NO_MORE_HP", False]
-            # sys.exit(0)
             return ["ONE_HP_LOST", False]
 
         self.chicken.setTileCenter(move)

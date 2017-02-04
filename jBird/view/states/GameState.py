@@ -1,3 +1,4 @@
+import os
 import sys
 
 import pygame
@@ -19,6 +20,7 @@ pygame.init()
 class GameState:
     def __init__(self):
         game = Game()
+        folder = os.path.dirname(os.path.realpath(__file__))
 
         (width, height) = (ScreenSize.WIDTH.value, ScreenSize.HEIGHT.value)
         screen = pygame.display.set_mode((width, height))
@@ -40,8 +42,8 @@ class GameState:
         boardDis = BoardDisplay(game.board)
         boardDis.displayBoard(screen)
 
-        chicken_image = pygame.image.load("chickenFront.png")
-        ball_image = pygame.image.load("ball.png")
+        chicken_image = pygame.image.load(os.path.join(folder, "chickenFront.png"))
+        ball_image = pygame.image.load(os.path.join(folder, "ball.png"))
 
         screen.blit(chicken_image, game.chicken.position)
         game.add_villain()
@@ -76,10 +78,6 @@ class GameState:
                         tileControl = TileControl()
                         tileControl.changeColor(tile, boardDis)
 
-                    # tile = game.board.return_tile_from_board(game.chicken.tile_center)
-                    # tileControl = TileControl()
-                    # tileControl.changeColor(tile, boardDis)
-
                     screen.fill(background_colour)
                     boardDis.displayBoard(screen)
                     screen.blit(player_label, (0, 0))
@@ -90,7 +88,6 @@ class GameState:
 
                     hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
                     screen.blit(hp_label, (0, 150))
-                    print("jeszcze raz pozycja ", game.chicken.getPosition())
                     screen.blit(chicken_image, game.chicken.getPosition())
                     pygame.display.flip()
 

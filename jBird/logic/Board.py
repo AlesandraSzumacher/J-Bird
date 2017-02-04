@@ -60,6 +60,7 @@ class Board:
 
     def if_tile_is_in_board(self, center):
         """Checks if the Tile is present on the board."""
+
         for tile in self.listOfTiles:
             if tile.center[0] == center[0] and tile.center[1] == center[1]:
                 return True

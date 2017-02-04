@@ -7,7 +7,7 @@ class Tile:
     """Class containing methods and attributes referring to single tile."""
     def __init__(self, centerX, centerY):
         """Initializing the single tile."""
-        self.center = [centerX, centerY]
+        self.center = (centerX, centerY)
         self.coordinates = []
         self.countCoordinates()
         self.state = TilesState.NOT_TOUCHED.value

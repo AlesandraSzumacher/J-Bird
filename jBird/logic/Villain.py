@@ -9,7 +9,9 @@ class Villain:
         else:
             tile_number = 22
 
-        self.position = board.listOfTiles[tile_number].center
+        self.position = []
+        self.position.append(board.listOfTiles[tile_number].center[0])
+        self.position.append(board.listOfTiles[tile_number].center[1])
 
         self.position[0] -= 30
         self.position[1] -= 45

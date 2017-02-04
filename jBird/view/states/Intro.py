@@ -1,3 +1,4 @@
+import os
 import sys
 
 import pygame
@@ -11,6 +12,8 @@ pygame.init()
 
 class Intro:
     def __init__(self):
+        folder = os.path.dirname(os.path.realpath(__file__))
+
         (width, height) = (ScreenSize.WIDTH.value, ScreenSize.HEIGHT.value)
         screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption('J-Bird')
@@ -18,7 +21,7 @@ class Intro:
         background_colour = (0, 0, 0)
         screen.fill(background_colour)
 
-        imageJBird = pygame.image.load("jbirdnapis.png")
+        imageJBird = pygame.image.load(os.path.join(folder, "jbirdnapis.png"))
         imageJBirdWidth = imageJBird.get_rect().size[0]
         screen.blit(imageJBird, (width/2 - imageJBirdWidth/2, 20))
 
