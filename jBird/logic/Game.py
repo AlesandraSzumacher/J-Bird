@@ -19,3 +19,6 @@ class Game(object):
     def next_round(self):
         """Changing round into next or into first in the new level."""
         self.round = ((self.round + 1) % 3) + 1
+
+    def handle_level(self):
+        pass

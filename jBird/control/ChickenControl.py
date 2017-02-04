@@ -18,11 +18,8 @@ class ChickenControl():
     def moveChicken(self, chicken, keyPressed, board):
         """Allows to move the chicken - uses methods moveChickenDown and moveChickenUp."""
         if chicken.level == -1:
-            if keyPressed in [K_KP1, K_KP3, K_w, K_EQUALS]:
-                chicken.setTileCenter(board.listOfTiles[0].center)
-                chicken.level = 0
-            else:
-                return
+            chicken.setTileCenter(board.listOfTiles[0].center)
+            chicken.level = 0
         else:
             self.moveChickenDown(chicken, keyPressed, board)
             self.moveChickenUp(chicken, keyPressed, board)
@@ -56,4 +53,3 @@ class ChickenControl():
             chicken.level -= 1
         elif keyPressed in [K_KP7, K_1, K_KP9, K_EQUALS]:
             return sys.exit(0)
-
