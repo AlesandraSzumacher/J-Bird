@@ -1,7 +1,7 @@
 import pygame
 
 from jBird.logic.Board import Board
-from jBird.utils.ScreenSize import ScreenSize, Positions
+from jBird.utils.Constants import ScreenSize, Positions
 
 
 class Game(object):

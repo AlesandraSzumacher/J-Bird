@@ -1,4 +1,4 @@
-from jBird.utils.ScreenSize import BoardSize, WallColor
+from jBird.utils.Constants import BoardSize, WallColor
 
 
 class CubeWallRight:

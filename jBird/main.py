@@ -1,1 +1,3 @@
-print("Hello word")
+from jBird.Game import Game
+
+Game()

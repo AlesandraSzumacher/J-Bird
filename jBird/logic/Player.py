@@ -1,5 +1,5 @@
 import pygame
-from jBird.utils.ScreenSize import PlayerPos
+from jBird.utils.Constants import PlayerPos
 
 
 class Player(object):

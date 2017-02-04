@@ -1,6 +1,6 @@
 import pygame
 
-from jBird.utils.ScreenSize import Positions
+from jBird.utils.Constants import Positions
 
 
 class Chicken():
