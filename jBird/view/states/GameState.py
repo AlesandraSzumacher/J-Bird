@@ -54,11 +54,15 @@ class GameState:
                     possible_move = controler.moveChicken(game.chicken, e.key, game.board)
                     if possible_move is None:
                         continue
-                    game.handle_level(possible_move)
 
-                    tile = game.board.return_tile_from_board(game.chicken.tile_center)
+                    tile = game.handle_level(possible_move)
+
                     tileControl = TileControl()
                     tileControl.changeColor(tile, boardDis)
+
+                    # tile = game.board.return_tile_from_board(game.chicken.tile_center)
+                    # tileControl = TileControl()
+                    # tileControl.changeColor(tile, boardDis)
 
                     screen.fill(background_colour)
                     boardDis.displayBoard(screen)

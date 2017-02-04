@@ -1,6 +1,7 @@
 import pygame
 import sys
 
+from jBird.control.TileControl import TileControl
 from jBird.logic.Board import Board
 from jBird.logic.Chicken import Chicken
 from jBird.logic.Player import Player
@@ -32,3 +33,8 @@ class Game(object):
             sys.exit(0)
             return
         self.chicken.setTileCenter(move)
+
+        tile = self.board.return_tile_from_board(self.chicken.tile_center)
+
+        return tile
+
