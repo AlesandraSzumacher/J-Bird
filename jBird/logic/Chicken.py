@@ -11,6 +11,11 @@ class Chicken():
         self.tile_center = Positions.CHICKEN_INIT_POSITION.value
 
     def setTileCenter(self, center):
+        if self.tile_center[1] > center[1]:
+            self.level += 1
+        if self.tile_center[1] < center[1]:
+            self.level -= 1
+
         self.tile_center = center
         self.setPosition()
 

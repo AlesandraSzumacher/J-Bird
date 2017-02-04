@@ -26,8 +26,10 @@ class GameState:
         screen.fill(background_colour)
 
         arialFont = pygame.font.SysFont("arial", 40)
-        player_label = arialFont.render("Player: ", 1, (95, 27, 84))
+        player_label = arialFont.render("Player: " + str(game.player.nick), 1, (95, 27, 84))
+        level_label = arialFont.render("Level: " + str(game.level), 1, (95, 27, 84))
         screen.blit(player_label, (0, 0))
+        screen.blit(level_label, (0, 50))
 
         boardDis = BoardDisplay(game.board)
         boardDis.displayBoard(screen)
@@ -48,15 +50,20 @@ class GameState:
                     sys.exit(0)
                 elif e.type == KEYDOWN:
                     controler = ChickenControl()
-                    controler.moveChicken(chicken, e.key, game.board)
 
-                    tile = game.board.return_tile_from_board(chicken.tile_center)
+                    possible_move = controler.moveChicken(game.chicken, e.key, game.board)
+                    if possible_move is None:
+                        continue
+                    game.handle_level(possible_move)
+
+                    tile = game.board.return_tile_from_board(game.chicken.tile_center)
                     tileControl = TileControl()
                     tileControl.changeColor(tile, boardDis)
 
                     screen.fill(background_colour)
                     boardDis.displayBoard(screen)
                     screen.blit(player_label, (0, 0))
+                    screen.blit(level_label, (0, 50))
 
                     screen.blit(chicken_image, chicken.getPosition())
                     pygame.display.flip()

@@ -1,6 +1,9 @@
 import pygame
+import sys
 
 from jBird.logic.Board import Board
+from jBird.logic.Chicken import Chicken
+from jBird.logic.Player import Player
 from jBird.utils.Constants import ScreenSize, Positions
 
 
@@ -11,6 +14,8 @@ class Game(object):
         self.level = 1
         self.round = 1
         self.board = Board([ScreenSize.WIDTH.value//2, Positions.BOARD_DOWN.value])
+        self.player = Player("Ola")
+        self.chicken = Chicken()
 
     def next_level(self):
         """Changing level into next."""
@@ -20,5 +25,10 @@ class Game(object):
         """Changing round into next or into first in the new level."""
         self.round = ((self.round + 1) % 3) + 1
 
-    def handle_level(self):
-        pass
+    def handle_level(self, move):
+        if_correct_move = self.board.if_tile_is_in_board(move)
+        if if_correct_move is False:
+            print("Poza plansza")
+            sys.exit(0)
+            return
+        self.chicken.setTileCenter(move)

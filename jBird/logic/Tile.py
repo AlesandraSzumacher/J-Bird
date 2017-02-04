@@ -1,5 +1,6 @@
-from jBird.control.TileControl import TileControl
 from jBird.utils.Constants import BoardSize
+from jBird.utils.LevelsUtils import TilesState
+
 
 
 class Tile:
@@ -9,7 +10,7 @@ class Tile:
         self.center = [centerX, centerY]
         self.coordinates = []
         self.countCoordinates()
-        self.tileControl = TileControl()
+        self.state = TilesState.NOT_TOUCHED.value
 
     def countCoordinates(self):
         """Returns the positions of tile's coordinates."""
@@ -23,5 +24,10 @@ class Tile:
     def pressed(self, mouse):
         """Checking if the Tile is pressed."""
         return self.tileControl.pressed(self.center, mouse)
+
+    def change_state(self):
+        if self.state == TilesState.NOT_TOUCHED.value:
+            self.state = TilesState.TOUCHED.value
+
 
 

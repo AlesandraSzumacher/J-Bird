@@ -10,6 +10,7 @@ class Board:
         self.listOfTiles = []
         self.listOfCubeWalls = []
         self.addTile(firstCenter, 0)
+        self.numberOfTouchTiles = 0
 
     def addTile(self, firstCenter, level):
         """Setting the Tiles on the board."""
