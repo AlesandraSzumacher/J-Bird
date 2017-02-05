@@ -48,8 +48,6 @@ class GameState:
         ball_image = pygame.image.load(os.path.join(folder, "ball.png"))
 
         screen.blit(chicken_image, game.chicken.position)
-        # screen.blit(ball_image, game.list_of_villains[0].get_position())
-
         pygame.display.flip()
 
         FALL_DOWN_BALL = USEREVENT + 1
@@ -76,6 +74,7 @@ class GameState:
                     if_collision = False
 
                     if tile == "NO_MORE_HP":
+                        #TODO
                         sys.exit(0)
 
                     if tile == "ONE_HP_LOST":
@@ -89,12 +88,21 @@ class GameState:
                     self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
                                         level_label, player_label, screen)
 
-                    pygame.display.flip()
+                    if_loose = False
+                    if if_collision:
+                        is_villan = False
+                        if_loose = game.handle_collision_with_villain()
+                        pygame.time.wait(500)
 
-                    if if_win:
+                    self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
+                                        level_label, player_label, screen)
+
+                    if if_loose:
+                        # TODO
                         sys.exit(0)
 
-                    if if_collision:
+                    if if_win:
+                        # TODO
                         sys.exit(0)
 
                 elif e.type == FALL_DOWN_BALL:
@@ -123,10 +131,16 @@ class GameState:
                         self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
                                             level_label, player_label, screen)
 
-                        pygame.display.flip()
+                        if_collision = game.check_collision_with_villains()
+                        if if_collision:
+                            is_villan = False
+                            if_loose = game.handle_collision_with_villain()
+                            pygame.time.wait(500)
+
 
     def display_screen(self, arialFont, background_colour, ball_image, boardDis, chicken_image, game, level_label,
                        player_label, screen):
+        """Display widgets on screen"""
         screen.fill(background_colour)
         boardDis.displayBoard(screen)
         screen.blit(player_label, (0, 0))
@@ -138,3 +152,4 @@ class GameState:
         screen.blit(chicken_image, game.chicken.getPosition())
         if len(game.list_of_villains) > 0:
             screen.blit(ball_image, game.list_of_villains[0].get_position())
+        pygame.display.flip()
