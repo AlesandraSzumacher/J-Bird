@@ -130,7 +130,7 @@ class GameState:
                                 sys.exit(0)
                             # pygame.time.wait(500)
 
-                    if len(game.list_of_villains) < 2:
+                    if len(game.list_of_villains) < game.max_number_of_villains:
                         # losujemy i sprawdzimy czy nie powinno się cos pojawic
                         if_create_new_villain = random.randint(0, 10) % 2
                         if if_create_new_villain == 1:

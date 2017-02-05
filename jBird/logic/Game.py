@@ -5,6 +5,7 @@ from jBird.logic.Player import Player
 from jBird.logic.Villain import Villain
 from jBird.utils.Constants import ScreenSize, Positions
 from jBird.utils.LevelsUtils import NumberOfTiles
+from jBird.utils.LevelsUtils import MaxNumberOfVillains
 
 
 
@@ -18,12 +19,14 @@ class Game(object):
         self.board = Board([ScreenSize.WIDTH.value//2, Positions.BOARD_DOWN.value])
         self.player = Player("Ola")
         self.chicken = Chicken()
+        self.max_number_of_villains = MaxNumberOfVillains.LEVEL_1.value
 
         self.list_of_villains = []
 
     def next_level(self):
         """Changing level into next."""
         self.level += 1
+        self.max_number_of_villains = MaxNumberOfVillains.LEVEL_2_3.value
 
     def next_round(self):
         """Changing round into next or into first in the new level."""
@@ -37,7 +40,7 @@ class Game(object):
         return False
 
     def handle_level(self, move):
-        """Handling sigle level."""
+        """Handling single level."""
         if_correct_move = self.board.if_tile_is_in_board(move)
 
         if if_correct_move is False:
