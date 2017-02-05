@@ -70,7 +70,7 @@ class GameState:
                     if possible_move is None:
                         continue
 
-                    tile, if_win = game.handle_level(possible_move)
+                    tile = game.handle_level(possible_move)
                     if_collision = False
 
                     if tile == "NO_MORE_HP":
@@ -82,6 +82,7 @@ class GameState:
                     else:
                         if_collision = game.check_collision_with_villains()
                         if not if_collision:
+                            game.handle_touch_tile(tile)
                             tileControl = TileControl()
                             tileControl.changeColor(tile, boardDis)
 
@@ -101,8 +102,9 @@ class GameState:
                         # TODO
                         sys.exit(0)
 
-                    if if_win:
+                    if game.if_win():
                         # TODO
+                        print("win win win")
                         sys.exit(0)
 
                 elif e.type == FALL_DOWN_BALL:

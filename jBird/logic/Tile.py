@@ -10,7 +10,7 @@ class Tile:
         self.center = (centerX, centerY)
         self.coordinates = []
         self.countCoordinates()
-        self.state = TilesState.NOT_TOUCHED.value
+        self.state = TilesState.NOT_TOUCHED
 
     def countCoordinates(self):
         """Returns the positions of tile's coordinates."""
@@ -25,12 +25,23 @@ class Tile:
         """Checking if the Tile is pressed."""
         return self.tileControl.pressed(self.center, mouse)
 
-    def change_state(self):
+    def change_state(self, level):
         """Changes state of tile and returns if succeed."""
-        if self.state == TilesState.NOT_TOUCHED.value:
-            self.state = TilesState.TOUCHED.value
-            return True
-        return False
+        if self.state == TilesState.NOT_TOUCHED:
+            self.state = TilesState.TOUCHED
+            return 1
+        if self.state == TilesState.TOUCHED and level > 1:
+            self.state = TilesState.DOUBLE_TOUCHED
+            return 1
+        if self.state == TilesState.DOUBLE_TOUCHED and level == 3:
+            self.state = TilesState.TOUCHED
+            return -1
+        return 0
+
+        # if self.state == TilesState.NOT_TOUCHED.value:
+        #     self.state = TilesState.TOUCHED.value
+        #     return True
+        # return False
 
 
 

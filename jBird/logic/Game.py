@@ -44,20 +44,24 @@ class Game(object):
         if if_correct_move is False:
             self.player.sub_hp()
             if self.player.hp < 0:
-                return ["NO_MORE_HP", False]
-            return ["ONE_HP_LOST", False]
+                return "NO_MORE_HP"
+            return "ONE_HP_LOST"
 
         self.chicken.setTileCenter(move)
 
         tile = self.board.return_tile_from_board(move)
 
-        if tile.change_state():
-            self.board.increaseNumberOfTouchedTiles()
+        return tile
 
-        if self.board.numberOfTouchedTiles == NumberOfTiles.LEVEL_1.value:
-            return [tile, True]
+    def if_win(self):
+        if self.level == 1:
+            if self.board.numberOfTouchedTiles == NumberOfTiles.LEVEL_1.value:
+                return True
+        else:
+            if self.board.numberOfTouchedTiles == NumberOfTiles.LEVEL_1.value * 2:
+                return True
+        return False
 
-        return [tile, False]
 
     def move_chicken_to_start_position(self):
         """Move chicken to start position, usualy after collision or fall down"""
@@ -74,3 +78,10 @@ class Game(object):
         self.player.sub_hp()
         self.list_of_villains.remove(self.list_of_villains[0])
         return self.player.hp < 0
+
+    def handle_touch_tile(self, tile):
+        change_status = tile.change_state(self.level)
+        if change_status == 1:
+            self.board.increaseNumberOfTouchedTiles()
+        elif change_status == -1:
+            self.board.decreaseNumberOfTouchedTiles()

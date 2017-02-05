@@ -8,9 +8,12 @@ class TileControl:
         """Changing the color of the tile."""
         for tileRomb in boardDisplay.tileRhombusList:
             if tileRomb.tile.center == tile.center:
-                tileRomb.changeColor(TileColor.TOUCH_COLOR.value)
-                if tile.state == TilesState.NOT_TOUCHED.value:
-                    tile.change_state()
+                tileRomb.changeColor(tile.state.value)
+                # if tile.state == TilesState.NOT_TOUCHED.value:
+                #     return tile.change_state(level)
+
+        return 0
+
 
 
 
