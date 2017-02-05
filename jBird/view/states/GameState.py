@@ -53,8 +53,6 @@ class GameState:
         FALL_DOWN_BALL = USEREVENT + 1
         pygame.time.set_timer(FALL_DOWN_BALL, 1500)
 
-        number_of_created_villain = 0
-
         clock = Clock()
         running = True
 
@@ -89,18 +87,17 @@ class GameState:
                     self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
                                         level_label, player_label, screen)
 
-                    if_loose = False
+                    if_lose = False
                     if if_collision:
-                        is_villan = 0
-                        if_loose = game.handle_collision_with_villain()
+                        if_lose = game.handle_collision_with_villain()
                         pygame.time.wait(500)
+
+                    if if_lose:
+                        # TODO
+                        sys.exit(0)
 
                     self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
                                         level_label, player_label, screen)
-
-                    if if_loose:
-                        # TODO
-                        sys.exit(0)
 
                     if game.if_win():
                         # TODO
@@ -115,33 +112,28 @@ class GameState:
                             continue
 
                 elif e.type == FALL_DOWN_BALL:
-                    print("numer ", number_of_created_villain)
-                    if number_of_created_villain != 0:
+                    if len(game.list_of_villains) != 0:
                         for villain in game.list_of_villains:
                             if_ball_need_to_fall_down = villain.move_down(game.board)
 
                             if if_ball_need_to_fall_down:
                                 game.list_of_villains.remove(villain)
-                                number_of_created_villain -= 1
 
                         self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
                                             level_label, player_label, screen)
 
                         if_collision = game.check_collision_with_villains()
-                        print("czy byla kolizja ", if_collision)
                         if if_collision:
-                            print("Kolizja")
-                            number_of_created_villain = 0
-                            if_loose = game.handle_collision_with_villain()
+                            if_lose = game.handle_collision_with_villain()
+                            if if_lose:
+                                # TODO
+                                sys.exit(0)
                             # pygame.time.wait(500)
 
-                    if number_of_created_villain < 2:
-                        print("losujemy")
+                    if len(game.list_of_villains) < 2:
                         # losujemy i sprawdzimy czy nie powinno się cos pojawic
                         if_create_new_villain = random.randint(0, 10) % 2
-                        print(if_create_new_villain)
                         if if_create_new_villain == 1:
-                            number_of_created_villain += 1
                             game.add_villain()
 
                         self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
