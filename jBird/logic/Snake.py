@@ -2,7 +2,9 @@ import random
 
 
 class Snake(object):
+    """This class makes and moves snake"""
     def __init__(self, board):
+        """Initializes new snake"""
         random_pos = random.randint(0, 2) % 2
         if random_pos == 0:
             tile_number = 1
@@ -15,6 +17,7 @@ class Snake(object):
         self.if_ball = True
 
     def get_position(self):
+        """Count correct position of image"""
         p = [self.position[0] - 35, self.position[1] - 55]
         return p
 
@@ -43,6 +46,7 @@ class Snake(object):
         return False
 
     def set_position(self, pos):
+        """Sets position of left down angle"""
         self.position[0] = pos[0]
         self.position[1] = pos[1]
 

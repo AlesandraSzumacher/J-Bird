@@ -96,6 +96,8 @@ class Game(object):
             self.board.decreaseNumberOfTouchedTiles()
 
     def board_for_next_level(self):
+        self.list_of_villains.clear()
+        self.snake = None
         self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value])
         self.chicken = Chicken()
 
