@@ -36,7 +36,7 @@ class WallColor(Enum):
 
 class Positions(Enum):
     """Enum containing starting position of chicken."""
-    CHICKEN_INIT_POSITION = [ScreenSize.WIDTH.value / 2 - 30, 10]
+    CHICKEN_INIT_POSITION = (ScreenSize.WIDTH.value / 2 - 30, 10)
     BOARD_DOWN = 150
 
 

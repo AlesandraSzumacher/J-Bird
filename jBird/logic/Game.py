@@ -85,3 +85,7 @@ class Game(object):
             self.board.increaseNumberOfTouchedTiles()
         elif change_status == -1:
             self.board.decreaseNumberOfTouchedTiles()
+
+    def board_for_next_level(self):
+        self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value])
+        self.chicken = Chicken()

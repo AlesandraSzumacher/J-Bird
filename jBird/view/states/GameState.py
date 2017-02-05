@@ -105,7 +105,14 @@ class GameState:
                     if game.if_win():
                         # TODO
                         print("win win win")
-                        sys.exit(0)
+                        if game.level == 3:
+                            sys.exit(0)
+                        else:
+                            game.next_level()
+                            game.board_for_next_level()
+                            boardDis = BoardDisplay(game.board)
+
+                            continue
 
                 elif e.type == FALL_DOWN_BALL:
                     if not is_villan:

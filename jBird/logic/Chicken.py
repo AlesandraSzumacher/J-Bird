@@ -7,7 +7,7 @@ class Chicken():
     """Class containing methods and attributes referring to chicken moving on the board."""
     def __init__(self):
         """"Initialization of chicken."""
-        self.position = Positions.CHICKEN_INIT_POSITION.value
+        self.position = list(Positions.CHICKEN_INIT_POSITION.value)
         self.level = -1
         self.feet_coords = (41, 78)
         self.tile_center = Positions.CHICKEN_INIT_POSITION.value
