@@ -19,3 +19,21 @@ class Villain:
 
     def get_position(self):
         return self.position
+
+    def move_down(self, board):
+        """Allows to move the chicken down - left or right."""
+        possible_move_down = board.countTwoDownTiles(self.position)
+        random_pos = random.randint(0, 2) % 2
+        choose_move = possible_move_down[random_pos]
+
+        if board.if_tile_is_in_board(choose_move):
+            self.set_position(choose_move)
+        else:
+            self.position = [0, 0]
+
+        return choose_move
+
+    def set_position(self, pos):
+        self.position[0] = pos[0] - 30
+        self.position[1] = pos[1] - 45
+

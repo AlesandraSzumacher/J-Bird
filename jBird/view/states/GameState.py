@@ -52,6 +52,7 @@ class GameState:
         pygame.display.flip()
 
         clock = Clock()
+
         running = True
 
         while running:
@@ -61,6 +62,7 @@ class GameState:
                     sys.exit(0)
                 elif e.type == KEYDOWN:
                     controler = ChickenControl()
+                    game.list_of_villains[0].move_down(game.board)
 
                     possible_move = controler.moveChicken(game.chicken, e.key, game.board)
                     if possible_move is None:
@@ -89,6 +91,8 @@ class GameState:
                     hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
                     screen.blit(hp_label, (0, 150))
                     screen.blit(chicken_image, game.chicken.getPosition())
+                    screen.blit(ball_image, game.list_of_villains[0].get_position())
+
                     pygame.display.flip()
 
                     if if_win:
