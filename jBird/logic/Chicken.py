@@ -12,7 +12,7 @@ class Chicken():
         self.feet_coords = (41, 78)
         self.tile_center = Positions.CHICKEN_INIT_POSITION.value
 
-    def setTileCenter(self, center):
+    def set_tile_center(self, center):
         """Setting the chicken on the center of the tile."""
         if self.tile_center[1] > center[1]:
             self.level += 1
@@ -20,14 +20,14 @@ class Chicken():
             self.level -= 1
 
         self.tile_center = center
-        self.setPosition()
+        self.set_position()
 
-    def setPosition(self):
+    def set_position(self):
         """Setting chicken position."""
         self.position[0] = self.tile_center[0] - self.feet_coords[0]
         self.position[1] = self.tile_center[1] - self.feet_coords[1]
 
-    def getPosition(self):
+    def get_position(self):
         """Getting chicken position."""
         return self.position
 

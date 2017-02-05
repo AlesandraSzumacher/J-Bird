@@ -1,6 +1,7 @@
 from enum import Enum
 from jBird.utils.Constants import TileColor
 
+
 class NumberOfTiles(Enum):
     """Enum containing number of tiles for all levels."""
     LEVEL_1 = 28
@@ -19,6 +20,8 @@ class TilesState(Enum):
     TOUCHED = TileColor.TOUCH_COLOR.value
     DOUBLE_TOUCHED = TileColor.DOUBLE_TOUCH_COLOR.value
 
+
 class MaxNumberOfVillains(Enum):
+    """Contains number of villians on the board for specific level."""
     LEVEL_1 = 2
     LEVEL_2_3 = 3

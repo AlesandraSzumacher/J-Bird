@@ -54,7 +54,7 @@ class Game(object):
                 return "NO_MORE_HP"
             return "ONE_HP_LOST"
 
-        self.chicken.setTileCenter(move)
+        self.chicken.set_tile_center(move)
 
         tile = self.board.return_tile_from_board(move)
 
@@ -63,10 +63,10 @@ class Game(object):
     def if_win(self):
         """Checks if the player finished the level successfully."""
         if self.level == 1:
-            if self.board.numberOfTouchedTiles == NumberOfTiles.LEVEL_1.value:
+            if self.board.number_of_touched_tiles == NumberOfTiles.LEVEL_1.value:
                 return True
         else:
-            if self.board.numberOfTouchedTiles == NumberOfTiles.LEVEL_1.value * 2:
+            if self.board.number_of_touched_tiles == NumberOfTiles.LEVEL_1.value * 2:
                 return True
         return False
 
@@ -91,19 +91,22 @@ class Game(object):
         """Handling touching the tile by chicken."""
         change_status = tile.change_state(self.level)
         if change_status == 1:
-            self.board.increaseNumberOfTouchedTiles()
+            self.board.increase_number_of_touched_tiles()
         elif change_status == -1:
-            self.board.decreaseNumberOfTouchedTiles()
+            self.board.decrease_number_of_touched_tiles()
 
     def board_for_next_level(self):
+        """Remove all villains, make new board and new chicken."""
         self.list_of_villains.clear()
         self.snake = None
         self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value])
         self.chicken = Chicken()
 
     def add_snake(self):
+        """Adds snake in ball."""
         self.snake = Snake(self.board)
         return self.snake
 
     def move_snake(self):
+        """Moves snake."""
         self.snake.move(self.board, self.chicken)
