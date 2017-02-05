@@ -62,6 +62,7 @@ class Snake(object):
             choose_move = possible_move_up[1]
 
         if choose_move is not None:
-            self.set_position(choose_move)
+            if board.if_tile_is_in_board(choose_move):
+                self.set_position(choose_move)
         return choose_move
 
