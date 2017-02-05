@@ -1,6 +1,3 @@
-import pygame
-import sys
-
 from jBird.control.TileControl import TileControl
 from jBird.logic.Board import Board
 from jBird.logic.Chicken import Chicken
@@ -33,12 +30,14 @@ class Game(object):
         self.round = ((self.round + 1) % 3) + 1
 
     def check_collision_with_villains(self):
+        """Checks if chicken collides with any of the villains."""
         for v in self.list_of_villains:
             if v.position == self.chicken.tile_center:
                 return True
             return False
 
     def handle_level(self, move):
+        """Handling sigle level."""
         if_correct_move = self.board.if_tile_is_in_board(move)
 
         if if_correct_move is False:
@@ -54,6 +53,7 @@ class Game(object):
         return tile
 
     def if_win(self):
+        """Checks if the player finished the level successfully."""
         if self.level == 1:
             if self.board.numberOfTouchedTiles == NumberOfTiles.LEVEL_1.value:
                 return True
@@ -61,7 +61,6 @@ class Game(object):
             if self.board.numberOfTouchedTiles == NumberOfTiles.LEVEL_1.value * 2:
                 return True
         return False
-
 
     def move_chicken_to_start_position(self):
         """Move chicken to start position, usualy after collision or fall down"""
@@ -80,6 +79,7 @@ class Game(object):
         return self.player.hp < 0
 
     def handle_touch_tile(self, tile):
+        """Handling touching the tile by chicken."""
         change_status = tile.change_state(self.level)
         if change_status == 1:
             self.board.increaseNumberOfTouchedTiles()
