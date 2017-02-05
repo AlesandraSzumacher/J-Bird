@@ -18,3 +18,7 @@ class TilesState(Enum):
     NOT_TOUCHED = TileColor.START_COLOR.value
     TOUCHED = TileColor.TOUCH_COLOR.value
     DOUBLE_TOUCHED = TileColor.DOUBLE_TOUCH_COLOR.value
+
+class MaxNumberOfVillains(Enum):
+    LEVEL_1 = 2
+    LEVEL_2_3 = 3

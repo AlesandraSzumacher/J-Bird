@@ -24,7 +24,7 @@ class BoardSize(Enum):
 class TileColor(Enum):
     """Enum containing color of the Tile in RGB."""
     START_COLOR = (255, 255, 168)
-    TOUCH_COLOR = (255, 0, 0)
+    TOUCH_COLOR = (185, 7, 7)
     DOUBLE_TOUCH_COLOR = (255, 120, 120)
 
 
