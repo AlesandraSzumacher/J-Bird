@@ -5,6 +5,7 @@ import pygame
 import pygame.constants
 from pygame.constants import KEYDOWN
 from pygame.constants import QUIT
+from pygame.constants import USEREVENT
 from pygame.time import Clock
 
 from jBird.control.ChickenControl import ChickenControl
@@ -51,8 +52,10 @@ class GameState:
 
         pygame.display.flip()
 
-        clock = Clock()
+        FALL_DOWN_BALL = USEREVENT + 1
+        pygame.time.set_timer(FALL_DOWN_BALL, 500)
 
+        clock = Clock()
         running = True
 
         while running:
@@ -62,7 +65,6 @@ class GameState:
                     sys.exit(0)
                 elif e.type == KEYDOWN:
                     controler = ChickenControl()
-                    game.list_of_villains[0].move_down(game.board)
 
                     possible_move = controler.moveChicken(game.chicken, e.key, game.board)
                     if possible_move is None:
@@ -76,7 +78,6 @@ class GameState:
                     if tile == "ONE_HP_LOST":
                         game.move_chicken_to_start_position()
                     else:
-
                         tileControl = TileControl()
                         tileControl.changeColor(tile, boardDis)
 
@@ -97,3 +98,20 @@ class GameState:
 
                     if if_win:
                         sys.exit(0)
+
+                elif e.type == FALL_DOWN_BALL:
+                    game.list_of_villains[0].move_down(game.board)
+                    screen.fill(background_colour)
+                    boardDis.displayBoard(screen)
+                    screen.blit(player_label, (0, 0))
+                    screen.blit(level_label, (0, 50))
+
+                    points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
+                    screen.blit(points_label, (0, 100))
+
+                    hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
+                    screen.blit(hp_label, (0, 150))
+                    screen.blit(chicken_image, game.chicken.getPosition())
+                    screen.blit(ball_image, game.list_of_villains[0].get_position())
+
+                    pygame.display.flip()
