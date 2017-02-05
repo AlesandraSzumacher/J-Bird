@@ -2,6 +2,7 @@ from jBird.control.TileControl import TileControl
 from jBird.logic.Board import Board
 from jBird.logic.Chicken import Chicken
 from jBird.logic.Player import Player
+from jBird.logic.Snake import Snake
 from jBird.logic.Villain import Villain
 from jBird.utils.Constants import ScreenSize, Positions
 from jBird.utils.LevelsUtils import NumberOfTiles
@@ -13,6 +14,7 @@ class Game(object):
     """Class containing  methods which refer to game, such as levels and rounds."""
     def __init__(self):
         """Initializing new Game."""
+        self.snake = None
         self.level = 1
         self.round = 1
         self.board = Board([ScreenSize.WIDTH.value//2, Positions.BOARD_DOWN.value])
@@ -31,6 +33,9 @@ class Game(object):
 
     def check_collision_with_villains(self):
         """Checks if chicken collides with any of the villains."""
+        v = self.snake
+        if v is not None and v.position[0] == self.chicken.tile_center[0] and v.position[1] == self.chicken.tile_center[1]:
+            return True
         for v in self.list_of_villains:
             if v.position[0] == self.chicken.tile_center[0] and  v.position[1] == self.chicken.tile_center[1]:
                 return True
@@ -76,6 +81,7 @@ class Game(object):
         self.move_chicken_to_start_position()
         self.player.sub_hp()
         self.list_of_villains.clear()
+        self.snake = None
         return self.player.hp < 0
 
     def handle_touch_tile(self, tile):
@@ -89,3 +95,10 @@ class Game(object):
     def board_for_next_level(self):
         self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value])
         self.chicken = Chicken()
+
+    def add_snake(self):
+        self.snake = Snake(self.board)
+        return self.snake
+
+    def move_snake(self):
+        self.snake.move(self.board, self.chicken)

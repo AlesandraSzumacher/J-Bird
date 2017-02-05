@@ -1,7 +1,7 @@
 import random
 
 
-class Villain:
+class Villain(object):
     def __init__(self, board):
         random_pos = random.randint(0, 2) % 2
         if random_pos == 0:
