@@ -32,6 +32,12 @@ class Game(object):
         """Changing round into next or into first in the new level."""
         self.round = ((self.round + 1) % 3) + 1
 
+    def check_collision_with_villains(self):
+        for v in self.list_of_villains:
+            if v.position == self.chicken.tile_center:
+                return True
+            return False
+
     def handle_level(self, move):
         if_correct_move = self.board.if_tile_is_in_board(move)
 
@@ -42,6 +48,8 @@ class Game(object):
             return ["ONE_HP_LOST", False]
 
         self.chicken.setTileCenter(move)
+        if_colision_detected = self.check_collision_with_villains()
+
         tile = self.board.return_tile_from_board(move)
 
         if tile.change_state():

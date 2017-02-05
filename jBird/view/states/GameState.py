@@ -73,6 +73,7 @@ class GameState:
                         continue
 
                     tile, if_win = game.handle_level(possible_move)
+                    if_collision = False
 
                     if tile == "NO_MORE_HP":
                         sys.exit(0)
@@ -80,8 +81,11 @@ class GameState:
                     if tile == "ONE_HP_LOST":
                         game.move_chicken_to_start_position()
                     else:
-                        tileControl = TileControl()
-                        tileControl.changeColor(tile, boardDis)
+                        if_collision = game.check_collision_with_villains()
+                        if not if_collision:
+                            tileControl = TileControl()
+                            tileControl.changeColor(tile, boardDis)
+
 
                     screen.fill(background_colour)
                     boardDis.displayBoard(screen)
@@ -102,10 +106,13 @@ class GameState:
                     if if_win:
                         sys.exit(0)
 
+                    if if_collision:
+                        sys.exit(0)
+
                 elif e.type == FALL_DOWN_BALL:
                     if not is_villan:
                         # losujemy i sprawdzimy czy nie powinno się cos pojawic
-                        is_villan = random.randint(0, 2) % 2
+                        is_villan = random.randint(0, 10) % 2
                         if is_villan == 0:
                             is_villan = False
                         else:
@@ -133,7 +140,6 @@ class GameState:
                         if not if_dont_remove:
                             game.list_of_villains.remove(game.list_of_villains[0])
                             is_villan = False
-                            print("wywalamy villana")
                             continue
 
                         screen.fill(background_colour)
