@@ -32,9 +32,11 @@ class Game(object):
     def check_collision_with_villains(self):
         """Checks if chicken collides with any of the villains."""
         for v in self.list_of_villains:
-            if v.position == self.chicken.tile_center:
+            print("vilan ", v.position, " chicken ", self.chicken.tile_center)
+        for v in self.list_of_villains:
+            if v.position[0] == self.chicken.tile_center[0] and  v.position[1] == self.chicken.tile_center[1]:
                 return True
-            return False
+        return False
 
     def handle_level(self, move):
         """Handling sigle level."""
@@ -69,7 +71,7 @@ class Game(object):
     def add_villain(self):
         """Create a new villain on list of villains"""
         self.list_of_villains.append(Villain(self.board))
-        return self.list_of_villains[0]
+        return self.list_of_villains[len(self.list_of_villains)-1]
 
     def handle_collision_with_villain(self):
         """Move chicken to start position, substract hp and villain disappear"""

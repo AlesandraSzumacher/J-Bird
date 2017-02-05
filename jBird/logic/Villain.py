@@ -9,9 +9,8 @@ class Villain:
         else:
             tile_number = 22
 
-        self.position = []
-        self.position.append(board.listOfTiles[tile_number].center[0])
-        self.position.append(board.listOfTiles[tile_number].center[1])
+        self.position = list(board.listOfTiles[tile_number].center)
+
         self.level = 1
 
     def get_position(self):
@@ -28,8 +27,8 @@ class Villain:
         elif board.if_tile_is_in_board(possible_move_down[(random_pos +1) % 2]):
             self.set_position(possible_move_down[(random_pos + 1) % 2])
         else:
-            return False
-        return True
+            return True
+        return False
 
     def set_position(self, pos):
         self.position[0] = pos[0]
