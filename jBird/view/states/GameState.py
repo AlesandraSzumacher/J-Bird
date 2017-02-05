@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 
 import pygame
@@ -47,13 +48,14 @@ class GameState:
         ball_image = pygame.image.load(os.path.join(folder, "ball.png"))
 
         screen.blit(chicken_image, game.chicken.position)
-        game.add_villain()
-        screen.blit(ball_image, game.list_of_villains[0].get_position())
+        # screen.blit(ball_image, game.list_of_villains[0].get_position())
 
         pygame.display.flip()
 
         FALL_DOWN_BALL = USEREVENT + 1
-        pygame.time.set_timer(FALL_DOWN_BALL, 500)
+        pygame.time.set_timer(FALL_DOWN_BALL, 1500)
+
+        is_villan = False
 
         clock = Clock()
         running = True
@@ -92,7 +94,8 @@ class GameState:
                     hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
                     screen.blit(hp_label, (0, 150))
                     screen.blit(chicken_image, game.chicken.getPosition())
-                    screen.blit(ball_image, game.list_of_villains[0].get_position())
+                    if len(game.list_of_villains) > 0:
+                        screen.blit(ball_image, game.list_of_villains[0].get_position())
 
                     pygame.display.flip()
 
@@ -100,18 +103,50 @@ class GameState:
                         sys.exit(0)
 
                 elif e.type == FALL_DOWN_BALL:
-                    game.list_of_villains[0].move_down(game.board)
-                    screen.fill(background_colour)
-                    boardDis.displayBoard(screen)
-                    screen.blit(player_label, (0, 0))
-                    screen.blit(level_label, (0, 50))
+                    if not is_villan:
+                        # losujemy i sprawdzimy czy nie powinno się cos pojawic
+                        is_villan = random.randint(0, 2) % 2
+                        if is_villan == 0:
+                            is_villan = False
+                        else:
+                            is_villan = True
+                            game.add_villain()
+                            screen.fill(background_colour)
+                            boardDis.displayBoard(screen)
+                            screen.blit(player_label, (0, 0))
+                            screen.blit(level_label, (0, 50))
 
-                    points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
-                    screen.blit(points_label, (0, 100))
+                            points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1,
+                                                            (95, 27, 84))
+                            screen.blit(points_label, (0, 100))
 
-                    hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
-                    screen.blit(hp_label, (0, 150))
-                    screen.blit(chicken_image, game.chicken.getPosition())
-                    screen.blit(ball_image, game.list_of_villains[0].get_position())
+                            hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
+                            screen.blit(hp_label, (0, 150))
+                            screen.blit(chicken_image, game.chicken.getPosition())
+                            screen.blit(ball_image, game.list_of_villains[0].get_position())
 
-                    pygame.display.flip()
+                            pygame.display.flip()
+                            continue
+
+                    if is_villan:
+                        if_dont_remove = game.list_of_villains[0].move_down(game.board)
+                        if not if_dont_remove:
+                            game.list_of_villains.remove(game.list_of_villains[0])
+                            is_villan = False
+                            print("wywalamy villana")
+                            continue
+
+                        screen.fill(background_colour)
+                        boardDis.displayBoard(screen)
+                        screen.blit(player_label, (0, 0))
+                        screen.blit(level_label, (0, 50))
+
+                        points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
+                        screen.blit(points_label, (0, 100))
+
+                        hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
+                        screen.blit(hp_label, (0, 150))
+                        screen.blit(chicken_image, game.chicken.getPosition())
+                        screen.blit(ball_image, game.list_of_villains[0].get_position())
+
+                        pygame.display.flip()
