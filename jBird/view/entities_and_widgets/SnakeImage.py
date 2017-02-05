@@ -11,4 +11,4 @@ class SnakeImage:
 
     def change_ball_into_snake(self):
         """Changes image with big ball to snake"""
-        self.image = pygame.image.load(os.path.join(self.folder, "waz.png"))
+        self.image = pygame.image.load(os.path.join(self.folder, "waz.PNG"))

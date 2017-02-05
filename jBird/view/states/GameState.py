@@ -150,10 +150,14 @@ class GameState:
                         if_create_new_villain = random.randint(0, 100) % 3
                         if if_create_new_villain == 1:
                             game.add_snake()
+                            snake_image = SnakeImage()
                         else:
                             continue
                     else:
                         game.move_snake()
+                        if not game.snake.if_ball:
+                            snake_image.change_ball_into_snake()
+
                         self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
                                                 level_label, snake_image, player_label, screen)
 
