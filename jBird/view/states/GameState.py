@@ -109,7 +109,7 @@ class GameState:
 
                     if game.if_win():
                         if game.level == 3:
-                            lose_label = font.render("Game End. You win! :)  ", 1, (255, 255, 255))
+                            lose_label = font.render("Congratulations. You win! :)  ", 1, (255, 255, 255))
                             final_points = font.render("You score:   " + str(game.board.number_of_touched_tiles), 1,
                                                        (255, 255, 255))
                             screen.blit(lose_label, (350.5, 0))
@@ -174,7 +174,7 @@ class GameState:
                                 not_frozen = False
 
     def handle_lose(self, font, game, screen):
-        lose_label = font.render("Game End. You lost :(  ", 1, (255, 255, 255))
+        lose_label = font.render("FATALITY. You lose :(  ", 1, (255, 255, 255))
         final_points = font.render("You score:   " + str(game.board.number_of_touched_tiles), 1,
                                    (255, 255, 255))
         screen.blit(lose_label, (350.5, 0))
