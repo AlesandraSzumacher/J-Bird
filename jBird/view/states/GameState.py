@@ -54,9 +54,8 @@ class GameState:
         pygame.display.flip()
 
         FALL_DOWN_BALL = USEREVENT + 1
-        pygame.time.set_timer(FALL_DOWN_BALL, 1500)
-
         MOVE_SNAKE = USEREVENT + 2
+        pygame.time.set_timer(FALL_DOWN_BALL, 1500)
         pygame.time.set_timer(MOVE_SNAKE, 1500)
 
         clock = Clock()
@@ -101,6 +100,7 @@ class GameState:
 
                     if if_lose:
                         self.handle_lose(font, game, screen)
+
                         not_frozen = False
                         continue
 
@@ -117,10 +117,13 @@ class GameState:
                             pygame.display.flip()
                             sys.exit(0)
                         else:
+                            pygame.time.set_timer(FALL_DOWN_BALL, 0)
+                            pygame.time.set_timer(MOVE_SNAKE, 0)
                             game.next_level()
                             game.board_for_next_level()
                             board_dis = BoardDisplay(game.board)
-
+                            pygame.time.set_timer(FALL_DOWN_BALL, 1500)
+                            pygame.time.set_timer(MOVE_SNAKE, 1500)
                             continue
 
                 elif e.type == FALL_DOWN_BALL and not_frozen:
@@ -141,7 +144,6 @@ class GameState:
                                 self.handle_lose(font, game, screen)
 
                     if len(game.list_of_villains) < game.max_number_of_villains:
-                        # losujemy i sprawdzimy czy nie powinno się cos pojawic
                         if_create_new_villain = random.randint(0, 10) % 2
                         if if_create_new_villain == 1:
                             game.add_villain()

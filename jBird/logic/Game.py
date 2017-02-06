@@ -94,7 +94,7 @@ class Game(object):
         """Move chicken to start position, substract hp and villain disappear"""
         self.move_chicken_to_start_position()
         self.player.sub_hp()
-        self.list_of_villains.clear()
+        self.list_of_villains = []
         self.snake = None
         return self.player.hp < 0
 
@@ -108,7 +108,7 @@ class Game(object):
 
     def board_for_next_level(self):
         """Remove all villains, make new board and new chicken."""
-        self.list_of_villains.clear()
+        self.list_of_villains = []
         self.snake = None
         self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value], BoardSize.LEVELS_NUMBER.value)
         self.chicken = Chicken()
