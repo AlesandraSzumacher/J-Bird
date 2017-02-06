@@ -2,7 +2,6 @@ from jBird.utils.Constants import BoardSize
 from jBird.utils.LevelsUtils import TilesState
 
 
-
 class Tile:
     """Class containing methods and attributes referring to single tile."""
     def __init__(self, centerX, centerY):
@@ -37,11 +36,6 @@ class Tile:
             self.state = TilesState.TOUCHED
             return -1
         return 0
-
-        # if self.state == TilesState.NOT_TOUCHED.value:
-        #     self.state = TilesState.TOUCHED.value
-        #     return True
-        # return False
 
 
 

@@ -11,7 +11,7 @@ class Snake(object):
         else:
             tile_number = 22
 
-        self.position = list(board.listOfTiles[tile_number].center)
+        self.position = list(board.list_of_tiles[tile_number].center)
 
         self.level = 1
         self.if_ball = True
@@ -34,7 +34,7 @@ class Snake(object):
 
     def move_down(self, board):
         """Find move to down, rand left or right, check if possible and move."""
-        possible_move_down = board.countTwoDownTiles(self.position)
+        possible_move_down = board.count_two_down_tiles(self.position)
         random_pos = random.randint(0, 2) % 2
 
         if board.if_tile_is_in_board(possible_move_down[random_pos]):
@@ -52,8 +52,8 @@ class Snake(object):
 
     def move_in_chicken_side(self, chicken, board):
         """Snake follows chicken."""
-        possible_move_down = board.countTwoDownTiles(self.position)
-        possible_move_up = board.countNextUpTiles(self.position)
+        possible_move_down = board.count_two_down_tiles(self.position)
+        possible_move_up = board.count_next_up_tiles(self.position)
 
         choose_move = None
         if chicken.tile_center[0] < self.position[0] and chicken.tile_center[1] > self.position[1]:

@@ -11,17 +11,18 @@ from pygame.time import Clock
 
 from jBird.control.ChickenControl import ChickenControl
 from jBird.control.TileControl import TileControl
-from jBird.logic.Chicken import Chicken
 from jBird.logic.Game import Game
 from jBird.utils.Constants import ScreenSize, Positions
 from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
 from jBird.view.entities_and_widgets.SnakeImage import SnakeImage
+from jBird.view.states.LevelsState import Level1State
 
 pygame.init()
 
 
 class GameState:
     def __init__(self):
+        # Level1State()
         game = Game()
         folder = os.path.dirname(os.path.realpath(__file__))
 
@@ -31,19 +32,19 @@ class GameState:
         background_colour = (0, 0, 0)
         screen.fill(background_colour)
 
-        arialFont = pygame.font.SysFont("arial", 40)
-        player_label = arialFont.render("Player: " + str(game.player.nick), 1, (95, 27, 84))
-        level_label = arialFont.render("Level: " + str(game.level), 1, (95, 27, 84))
-        points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
-        hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
+        arial_font = pygame.font.SysFont("arial", 40)
+        player_label = arial_font.render("Player: " + str(game.player.nick), 1, (95, 27, 84))
+        level_label = arial_font.render("Level: " + str(game.level), 1, (95, 27, 84))
+        points_label = arial_font.render("Points: " + str(game.board.number_of_touched_tiles), 1, (95, 27, 84))
+        hp_label = arial_font.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
 
         screen.blit(player_label, (0, 0))
         screen.blit(level_label, (0, 50))
         screen.blit(points_label, (0, 100))
         screen.blit(hp_label, (0, 150))
 
-        boardDis = BoardDisplay(game.board)
-        boardDis.displayBoard(screen)
+        board_dis = BoardDisplay(game.board)
+        board_dis.display_board(screen)
 
         chicken_image = pygame.image.load(os.path.join(folder, "chickenFront.png"))
         ball_image = pygame.image.load(os.path.join(folder, "ball.png"))
@@ -69,7 +70,7 @@ class GameState:
                 elif e.type == KEYDOWN:
                     controler = ChickenControl()
 
-                    possible_move = controler.moveChicken(game.chicken, e.key, game.board)
+                    possible_move = controler.move_chicken(game.chicken, e.key, game.board)
                     if possible_move is None:
                         continue
 
@@ -87,9 +88,9 @@ class GameState:
                         if not if_collision:
                             game.handle_touch_tile(tile)
                             tileControl = TileControl()
-                            tileControl.changeColor(tile, boardDis)
+                            tileControl.change_color(tile, board_dis)
 
-                    self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
+                    self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
                                         level_label, snake_image, player_label, screen)
 
                     if_lose = False
@@ -101,7 +102,7 @@ class GameState:
                         # TODO
                         sys.exit(0)
 
-                    self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
+                    self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
                                         level_label, snake_image, player_label, screen)
 
                     if game.if_win():
@@ -112,7 +113,7 @@ class GameState:
                         else:
                             game.next_level()
                             game.board_for_next_level()
-                            boardDis = BoardDisplay(game.board)
+                            board_dis = BoardDisplay(game.board)
 
                             continue
 
@@ -124,7 +125,7 @@ class GameState:
                             if if_ball_need_to_fall_down:
                                 game.list_of_villains.remove(villain)
 
-                        self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
+                        self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
                                             level_label, snake_image, player_label, screen)
 
                         if_collision = game.check_collision_with_villains()
@@ -133,7 +134,6 @@ class GameState:
                             if if_lose:
                                 # TODO
                                 sys.exit(0)
-                                # pygame.time.wait(500)
 
                     if len(game.list_of_villains) < game.max_number_of_villains:
                         # losujemy i sprawdzimy czy nie powinno się cos pojawic
@@ -141,7 +141,7 @@ class GameState:
                         if if_create_new_villain == 1:
                             game.add_villain()
 
-                        self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
+                        self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
                                             level_label, snake_image, player_label, screen)
                         continue
 
@@ -158,7 +158,7 @@ class GameState:
                         if not game.snake.if_ball:
                             snake_image.change_ball_into_snake()
 
-                        self.display_screen(arialFont, background_colour, ball_image, boardDis, chicken_image, game,
+                        self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
                                                 level_label, snake_image, player_label, screen)
 
                         if_collision = game.check_collision_with_villains()
@@ -172,14 +172,14 @@ class GameState:
                        snake_image, player_label, screen):
         """Display widgets on screen"""
         screen.fill(background_colour)
-        boardDis.displayBoard(screen)
+        boardDis.display_board(screen)
         screen.blit(player_label, (0, 0))
         screen.blit(level_label, (0, 50))
-        points_label = arialFont.render("Points: " + str(game.board.numberOfTouchedTiles), 1, (95, 27, 84))
+        points_label = arialFont.render("Points: " + str(game.board.number_of_touched_tiles), 1, (95, 27, 84))
         screen.blit(points_label, (0, 100))
         hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
         screen.blit(hp_label, (0, 150))
-        screen.blit(chicken_image, game.chicken.getPosition())
+        screen.blit(chicken_image, game.chicken.get_position())
 
         if game.snake is not None:
             screen.blit(snake_image.image, game.snake.get_position())
