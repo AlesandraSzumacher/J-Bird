@@ -18,11 +18,78 @@ class StartInfo():
         background_colour = (0, 0, 0)
         screen.fill(background_colour)
 
-        myfont = pygame.font.SysFont("monospace", 50, True)
+        my_font_instr = pygame.font.SysFont("monospace", 50, True)
 
-        label = myfont.render("Instructions", 1, (255, 255, 255))
-        text_rect = label.get_rect(center=(width / 2, 60))
-        screen.blit(label, text_rect)
+        label_instr = my_font_instr.render("Instructions", 1, (255, 255, 255))
+        label_instr_rect = label_instr.get_rect(center=(width / 2, 60))
+        screen.blit(label_instr, label_instr_rect)
+
+        my_font_text = pygame.font.SysFont("monospace", 20, True)
+
+        l1 = my_font_text.render("Welocome to J-bird Game!" , 1, (255, 255, 255))
+        rect1 = l1.get_rect(center=(width / 2, 90))
+        # screen.blit(l1, rect1)
+
+        l2 = my_font_text.render("Moves:" , 1, (255, 255, 255))
+        rect2 = l2.get_rect(center=(width / 2, 120))
+        screen.blit(l2, rect2)
+
+        l3 = my_font_text.render("up - left   : 7" , 1, (255, 255, 255))
+        rect3 = l3.get_rect(center=(width / 2, 150))
+        screen.blit(l3, rect3)
+
+        l4 = my_font_text.render("up - right  : 9", 1, (255, 255, 255))
+        rect4 = l4.get_rect(center=(width / 2, 180))
+        screen.blit(l4, rect4)
+
+        l5 = my_font_text.render("down - left : 1", 1, (255, 255, 255))
+        rect5 = l5.get_rect(center=(width / 2, 210))
+        screen.blit(l5, rect5)
+
+        l6 = my_font_text.render("down - right: 3", 1, (255, 255, 255))
+        rect6 = l6.get_rect(center=(width / 2, 240))
+        screen.blit(l6, rect6)
+
+        l7 = my_font_text.render("or", 1, (255, 255, 255))
+        rect7 = l7.get_rect(center=(width / 2, 270))
+        screen.blit(l7, rect7)
+
+        l8 = my_font_text.render("up - left   : 1", 1, (255, 255, 255))
+        rect8 = l8.get_rect(center=(width / 2, 300))
+        screen.blit(l8, rect8)
+
+        l9 = my_font_text.render("up - right  : q", 1, (255, 255, 255))
+        rect9 = l9.get_rect(center=(width / 2, 330))
+        screen.blit(l9, rect9)
+
+        l10 = my_font_text.render("down - left : =", 1, (255, 255, 255))
+        rect10 = l10.get_rect(center=(width / 2, 360))
+        screen.blit(l10, rect10)
+
+        l11 = my_font_text.render("down - right: p", 1, (255, 255, 255))
+        rect11 = l11.get_rect(center=(width / 2, 390))
+        screen.blit(l11, rect11)
+
+        l12 = my_font_text.render("Press any key to start a game", 1, (255, 255, 255))
+        rect12 = l12.get_rect(center=(width / 2, 450))
+        screen.blit(l12, rect12)
+        instruction_text = "Welocome to J-bird Game!\n" \
+                           "Moves:\n" \
+                           "up - left   : 7\n" \
+                           "up - right  : 9\n" \
+                           "down - left : 1\n" \
+                           "down - right: 3\n" \
+                           "\n" \
+                           "or\n" \
+                           "up - left   : 7\n" \
+                           "up - right  : 9\n" \
+                           "down - left : 1\n" \
+                           "down - right: 3\n" \
+                           "\n\n" \
+                           "Press any key to start a game"
+        # label_text = my_font_text.render(instruction_text, 1, (255, 255, 255))
+        # label_text_rect = label_text.get_rect(center=(width/2, 90))
+        # screen.blit(label_text, label_text_rect)
 
         pygame.display.flip()
 
