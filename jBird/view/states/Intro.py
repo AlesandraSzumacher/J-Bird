@@ -29,6 +29,20 @@ class Intro:
         imageJBirdWidth = imageJBird.get_rect().size[0]
         screen.blit(imageJBird, (width / 2 - imageJBirdWidth / 2, 20))
 
+        my_font_instr = pygame.font.SysFont("monospace", 30, True)
+
+        label_instr = my_font_instr.render("By", 1, (255, 255, 255))
+        label_instr_rect = label_instr.get_rect(center=(width / 2, 350))
+        screen.blit(label_instr, label_instr_rect)
+
+        label_instr = my_font_instr.render("Maria Babkiewicz", 1, (255, 255, 255))
+        label_instr_rect = label_instr.get_rect(center=(width / 2, 400))
+        screen.blit(label_instr, label_instr_rect)
+
+        label_instr = my_font_instr.render("Aleksandra Szumacher", 1, (255, 255, 255))
+        label_instr_rect = label_instr.get_rect(center=(width / 2, 440))
+        screen.blit(label_instr, label_instr_rect)
+
         button1 = Buttons.Button()
         button1height = 200
         button1width = 100
@@ -46,7 +60,6 @@ class Intro:
                 elif event.type == MOUSEBUTTONDOWN:
                     if button1.pressed(pygame.mouse.get_pos()):
                         newStartInfo = StartInfo()
-                        # newGameState = GameState()
 
 
 intro = Intro()
