@@ -5,10 +5,11 @@ from jBird.utils.Constants import BoardSize
 
 class Board:
     """Class containing methods and attributes referring to game board."""
-    def __init__(self, firstCenter):
+    def __init__(self, firstCenter, number_of_levels):
         """Board initializing."""
         self.list_of_tiles = []
         self.list_of_cube_walls = []
+        self.number_of_levels = number_of_levels
         self.add_tile(firstCenter, 0)
         self.number_of_touched_tiles = 0
 
@@ -30,7 +31,7 @@ class Board:
         right_next_center = [first_center[0] + BoardSize.TILE_WIDTH.value // 2,
                            first_center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value]
 
-        if level == (BoardSize.LEVELS_NUMBER.value - 1):
+        if (self.number_of_levels - 1) == level:
             return
 
         self.add_tile(left_next_center, level + 1)

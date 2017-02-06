@@ -1,24 +1,27 @@
+import pygame
+
 from jBird.control.TileControl import TileControl
 from jBird.logic.Board import Board
 from jBird.logic.Chicken import Chicken
 from jBird.logic.Player import Player
 from jBird.logic.Snake import Snake
 from jBird.logic.Villain import Villain
-from jBird.utils.Constants import ScreenSize, Positions
+from jBird.utils.Constants import ScreenSize, Positions, BoardSize
 from jBird.utils.LevelsUtils import NumberOfTiles
 from jBird.utils.LevelsUtils import MaxNumberOfVillains
-
-
+from jBird.view.states.LevelsState import Level1State, Level2State, Level3State
 
 
 class Game(object):
     """Class containing  methods which refer to game, such as levels and rounds."""
+
     def __init__(self):
         """Initializing new Game."""
+        Level1State()
         self.snake = None
         self.level = 1
         self.round = 1
-        self.board = Board([ScreenSize.WIDTH.value//2, Positions.BOARD_DOWN.value])
+        self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value], BoardSize.LEVELS_NUMBER.value)
         self.player = Player("Ola")
         self.chicken = Chicken()
         self.max_number_of_villains = MaxNumberOfVillains.LEVEL_1.value
@@ -29,6 +32,12 @@ class Game(object):
         """Changing level into next."""
         self.level += 1
         self.max_number_of_villains = MaxNumberOfVillains.LEVEL_2_3.value
+        pygame.time.wait(1000)
+
+        if self.level == 2:
+            Level2State()
+        else:
+            Level3State()
 
     def next_round(self):
         """Changing round into next or into first in the new level."""
@@ -37,10 +46,11 @@ class Game(object):
     def check_collision_with_villains(self):
         """Checks if chicken collides with any of the villains."""
         v = self.snake
-        if v is not None and v.position[0] == self.chicken.tile_center[0] and v.position[1] == self.chicken.tile_center[1]:
+        if v is not None and v.position[0] == self.chicken.tile_center[0] and v.position[1] == self.chicken.tile_center[
+            1]:
             return True
         for v in self.list_of_villains:
-            if v.position[0] == self.chicken.tile_center[0] and  v.position[1] == self.chicken.tile_center[1]:
+            if v.position[0] == self.chicken.tile_center[0] and v.position[1] == self.chicken.tile_center[1]:
                 return True
         return False
 
@@ -77,7 +87,7 @@ class Game(object):
     def add_villain(self):
         """Create a new villain on list of villains"""
         self.list_of_villains.append(Villain(self.board))
-        return self.list_of_villains[len(self.list_of_villains)-1]
+        return self.list_of_villains[len(self.list_of_villains) - 1]
 
     def handle_collision_with_villain(self):
         """Move chicken to start position, substract hp and villain disappear"""
@@ -99,7 +109,7 @@ class Game(object):
         """Remove all villains, make new board and new chicken."""
         self.list_of_villains.clear()
         self.snake = None
-        self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value])
+        self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value], BoardSize.LEVELS_NUMBER.value)
         self.chicken = Chicken()
 
     def add_snake(self):

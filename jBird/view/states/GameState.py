@@ -15,12 +15,14 @@ from jBird.logic.Game import Game
 from jBird.utils.Constants import ScreenSize, Positions
 from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
 from jBird.view.entities_and_widgets.SnakeImage import SnakeImage
+from jBird.view.states.LevelsState import Level1State
 
 pygame.init()
 
 
 class GameState:
     def __init__(self):
+        # Level1State()
         game = Game()
         folder = os.path.dirname(os.path.realpath(__file__))
 
