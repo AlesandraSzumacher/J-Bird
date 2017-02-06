@@ -11,7 +11,9 @@ from jBird.view.states.GameState import GameState
 
 pygame.init()
 class StartInfo():
+    """Info which appears when the game starts."""
     def __init__(self):
+        """Initialization of StartInfo."""
         (width, height) = (ScreenSize.WIDTH.value, ScreenSize.HEIGHT.value)
         screen = pygame.display.set_mode((width, height))
 
@@ -70,26 +72,21 @@ class StartInfo():
         rect11 = l11.get_rect(center=(width / 2, 390))
         screen.blit(l11, rect11)
 
-        l12 = my_font_text.render("Press any key to start a game", 1, (255, 255, 255))
-        rect12 = l12.get_rect(center=(width / 2, 450))
+        l12 = my_font_text.render("The bird earns the points by changing the color of the tiles.", 1, (255, 255, 255))
+        rect12 = l12.get_rect(center=(width / 2, 420))
         screen.blit(l12, rect12)
-        instruction_text = "Welocome to J-bird Game!\n" \
-                           "Moves:\n" \
-                           "up - left   : 7\n" \
-                           "up - right  : 9\n" \
-                           "down - left : 1\n" \
-                           "down - right: 3\n" \
-                           "\n" \
-                           "or\n" \
-                           "up - left   : 7\n" \
-                           "up - right  : 9\n" \
-                           "down - left : 1\n" \
-                           "down - right: 3\n" \
-                           "\n\n" \
-                           "Press any key to start a game"
-        # label_text = my_font_text.render(instruction_text, 1, (255, 255, 255))
-        # label_text_rect = label_text.get_rect(center=(width/2, 90))
-        # screen.blit(label_text, label_text_rect)
+
+        l13 = my_font_text.render("The birds dies when collides with ball or with snake.", 1, (255, 255, 255))
+        rect13 = l13.get_rect(center=(width / 2, 450))
+        screen.blit(l13, rect13)
+
+        l14 = my_font_text.render("It also dies when falls from the piramid.", 1, (255, 255, 255))
+        rect14 = l14.get_rect(center=(width / 2, 480))
+        screen.blit(l14, rect14)
+
+        l20 = my_font_text.render("Press any key to start a game", 1, (255, 255, 255))
+        rect12 = l20.get_rect(center=(width / 2, 650))
+        screen.blit(l20, rect12)
 
         pygame.display.flip()
 
