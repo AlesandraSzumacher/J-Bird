@@ -15,13 +15,15 @@ from jBird.logic.Game import Game
 from jBird.utils.Constants import ScreenSize, Positions
 from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
 from jBird.view.entities_and_widgets.SnakeImage import SnakeImage
-from jBird.view.states.LevelsState import Level1State
 
 pygame.init()
 
 
 class GameState:
+    """Class containing methods and attributes referring to game state."""
+
     def __init__(self):
+        """Initialization of GameState."""
         # Level1State()
         game = Game()
         folder = os.path.dirname(os.path.realpath(__file__))
@@ -32,16 +34,14 @@ class GameState:
         background_colour = (0, 0, 0)
         screen.fill(background_colour)
 
-        arial_font = pygame.font.SysFont("arial", 40)
-        player_label = arial_font.render("Player: " + str(game.player.nick), 1, (95, 27, 84))
-        level_label = arial_font.render("Level: " + str(game.level), 1, (95, 27, 84))
-        points_label = arial_font.render("Points: " + str(game.board.number_of_touched_tiles), 1, (95, 27, 84))
-        hp_label = arial_font.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
+        font = pygame.font.SysFont("monospace", 40, True)
+        level_label = font.render("Level: " + str(game.level), 1, (255, 255, 255))
+        points_label = font.render("Points: " + str(game.board.number_of_touched_tiles), 1, (255, 255, 255))
+        hp_label = font.render("Hp: " + str(game.player.hp), 1, (255, 255, 255))
 
-        screen.blit(player_label, (0, 0))
-        screen.blit(level_label, (0, 50))
-        screen.blit(points_label, (0, 100))
-        screen.blit(hp_label, (0, 150))
+        screen.blit(level_label, (0, 0))
+        screen.blit(points_label, (0, 50))
+        screen.blit(hp_label, (0, 100))
 
         board_dis = BoardDisplay(game.board)
         board_dis.display_board(screen)
@@ -61,13 +61,13 @@ class GameState:
 
         clock = Clock()
         running = True
-
+        not_frozen = True
         while running:
 
             for e in pygame.event.get():
                 if e.type == QUIT:
                     sys.exit(0)
-                elif e.type == KEYDOWN:
+                elif e.type == KEYDOWN and not_frozen:
                     controler = ChickenControl()
 
                     possible_move = controler.move_chicken(game.chicken, e.key, game.board)
@@ -78,8 +78,9 @@ class GameState:
                     if_collision = False
 
                     if tile == "NO_MORE_HP":
-                        # TODO
-                        sys.exit(0)
+                        self.handle_lose(font, game, screen)
+                        not_frozen = False
+                        continue
 
                     if tile == "ONE_HP_LOST":
                         game.move_chicken_to_start_position()
@@ -90,8 +91,8 @@ class GameState:
                             tileControl = TileControl()
                             tileControl.change_color(tile, board_dis)
 
-                    self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
-                                        level_label, snake_image, player_label, screen)
+                    self.display_screen(font, background_colour, ball_image, board_dis, chicken_image, game,
+                                        level_label, snake_image, screen)
 
                     if_lose = False
                     if if_collision:
@@ -99,16 +100,21 @@ class GameState:
                         pygame.time.wait(500)
 
                     if if_lose:
-                        # TODO
-                        sys.exit(0)
+                        self.handle_lose(font, game, screen)
+                        not_frozen = False
+                        continue
 
-                    self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
-                                        level_label, snake_image, player_label, screen)
+                    self.display_screen(font, background_colour, ball_image, board_dis, chicken_image, game,
+                                        level_label, snake_image, screen)
 
                     if game.if_win():
-                        # TODO
-                        print("win win win")
                         if game.level == 3:
+                            lose_label = font.render("Game End. You win! :)  ", 1, (255, 255, 255))
+                            final_points = font.render("You score:   " + str(game.board.number_of_touched_tiles), 1,
+                                                       (255, 255, 255))
+                            screen.blit(lose_label, (350.5, 0))
+                            screen.blit(final_points, (400.5, 50))
+                            pygame.display.flip()
                             sys.exit(0)
                         else:
                             game.next_level()
@@ -117,7 +123,7 @@ class GameState:
 
                             continue
 
-                elif e.type == FALL_DOWN_BALL:
+                elif e.type == FALL_DOWN_BALL and not_frozen:
                     if len(game.list_of_villains) != 0:
                         for villain in game.list_of_villains:
                             if_ball_need_to_fall_down = villain.move_down(game.board)
@@ -125,15 +131,14 @@ class GameState:
                             if if_ball_need_to_fall_down:
                                 game.list_of_villains.remove(villain)
 
-                        self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
-                                            level_label, snake_image, player_label, screen)
+                        self.display_screen(font, background_colour, ball_image, board_dis, chicken_image, game,
+                                            level_label, snake_image, screen)
 
                         if_collision = game.check_collision_with_villains()
                         if if_collision:
                             if_lose = game.handle_collision_with_villain()
                             if if_lose:
-                                # TODO
-                                sys.exit(0)
+                                self.handle_lose(font, game, screen)
 
                     if len(game.list_of_villains) < game.max_number_of_villains:
                         # losujemy i sprawdzimy czy nie powinno się cos pojawic
@@ -141,11 +146,11 @@ class GameState:
                         if if_create_new_villain == 1:
                             game.add_villain()
 
-                        self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
-                                            level_label, snake_image, player_label, screen)
+                        self.display_screen(font, background_colour, ball_image, board_dis, chicken_image, game,
+                                            level_label, snake_image, screen)
                         continue
 
-                elif e.type == MOVE_SNAKE:
+                elif e.type == MOVE_SNAKE and not_frozen:
                     if game.snake is None:
                         if_create_new_villain = random.randint(0, 100) % 3
                         if if_create_new_villain == 1:
@@ -158,27 +163,35 @@ class GameState:
                         if not game.snake.if_ball:
                             snake_image.change_ball_into_snake()
 
-                        self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
-                                                level_label, snake_image, player_label, screen)
+                        self.display_screen(font, background_colour, ball_image, board_dis, chicken_image, game,
+                                            level_label, snake_image, screen)
 
                         if_collision = game.check_collision_with_villains()
                         if if_collision:
                             if_lose = game.handle_collision_with_villain()
                             if if_lose:
-                                # TODO
-                                sys.exit(0)
+                                self.handle_lose(font, game, screen)
+                                not_frozen = False
+
+    def handle_lose(self, font, game, screen):
+        print("obsluzylem")
+        lose_label = font.render("Game End. You lost :(  ", 1, (255, 255, 255))
+        final_points = font.render("You score:   " + str(game.board.number_of_touched_tiles), 1,
+                                   (255, 255, 255))
+        screen.blit(lose_label, (350.5, 0))
+        screen.blit(final_points, (400.5, 50))
+        pygame.display.flip()
 
     def display_screen(self, arialFont, background_colour, ball_image, boardDis, chicken_image, game, level_label,
-                       snake_image, player_label, screen):
+                       snake_image, screen):
         """Display widgets on screen"""
         screen.fill(background_colour)
         boardDis.display_board(screen)
-        screen.blit(player_label, (0, 0))
-        screen.blit(level_label, (0, 50))
-        points_label = arialFont.render("Points: " + str(game.board.number_of_touched_tiles), 1, (95, 27, 84))
-        screen.blit(points_label, (0, 100))
-        hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (95, 27, 84))
-        screen.blit(hp_label, (0, 150))
+        screen.blit(level_label, (0, 0))
+        points_label = arialFont.render("Points: " + str(game.board.number_of_touched_tiles), 1, (255, 255, 255))
+        screen.blit(points_label, (0, 50))
+        hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (255, 255, 255))
+        screen.blit(hp_label, (0, 100))
         screen.blit(chicken_image, game.chicken.get_position())
 
         if game.snake is not None:

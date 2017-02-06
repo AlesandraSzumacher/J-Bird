@@ -1,9 +1,9 @@
-import pygame
 from jBird.utils.Constants import PlayerPos
 
 
 class Player(object):
     """Class containing methods and attributes referring to current player."""
+
     def __init__(self, nick):
         """Player initialize."""
         self.nick = nick

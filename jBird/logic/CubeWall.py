@@ -3,6 +3,7 @@ from jBird.utils.Constants import BoardSize, WallColor
 
 class CubeWallRight:
     """Class containing methods and attributes referring to right wall of the cube."""
+
     def __init__(self, center_up):
         """Initializing the right wall of the cube."""
         self.center = center_up
@@ -13,7 +14,8 @@ class CubeWallRight:
     def count_coords(self):
         """Returns the positions of coords of right walls."""
         up = (self.center[0] + BoardSize.TILE_WIDTH.value // 2, self.center[1])
-        r = (self.center[0] + BoardSize.TILE_WIDTH.value // 2, self.center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value // 2)
+        r = (self.center[0] + BoardSize.TILE_WIDTH.value // 2,
+             self.center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value // 2)
         down = (self.center[0], self.center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value)
         l = (self.center[0], self.center[1] + BoardSize.TILE_HEIGHT.value // 2)
 
@@ -25,6 +27,7 @@ class CubeWallRight:
 
 class CubeWallLeft:
     """Class containing methods and attributes referring to left wall of the cube."""
+
     def __init__(self, center_up):
         """Initializing the left wall of the cube."""
         self.center = center_up
@@ -35,8 +38,9 @@ class CubeWallLeft:
     def count_coords(self):
         """Returns the positions of coords of left walls."""
         up = (self.center[0] - BoardSize.TILE_WIDTH.value // 2, self.center[1])
-        r = (self.center[0] - BoardSize.TILE_WIDTH.value // 2, self.center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value // 2)
-        down = (self.center[0], self.center[1] + BoardSize.TILE_HEIGHT.value // 2 +  BoardSize.CUBE_BREAK_HEIGHT.value)
+        r = (self.center[0] - BoardSize.TILE_WIDTH.value // 2,
+             self.center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value // 2)
+        down = (self.center[0], self.center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value)
         l = (self.center[0], self.center[1] + BoardSize.TILE_HEIGHT.value // 2)
 
         self.coordinates.append(up)

@@ -1,17 +1,15 @@
-import os
 import sys
-
 import pygame
-from pygame.constants import MOUSEBUTTONDOWN
 from pygame.constants import KEYDOWN
-
 from jBird.utils.Constants import ScreenSize
-from jBird.view.entities_and_widgets import Buttons
 from jBird.view.states.GameState import GameState
 
 pygame.init()
+
+
 class StartInfo():
     """Info which appears when the game starts."""
+
     def __init__(self):
         """Initialization of StartInfo."""
         (width, height) = (ScreenSize.WIDTH.value, ScreenSize.HEIGHT.value)
@@ -28,15 +26,15 @@ class StartInfo():
 
         my_font_text = pygame.font.SysFont("monospace", 20, True)
 
-        l1 = my_font_text.render("Welocome to J-bird Game!" , 1, (255, 255, 255))
+        l1 = my_font_text.render("Welocome to J-bird Game!", 1, (255, 255, 255))
         rect1 = l1.get_rect(center=(width / 2, 90))
         # screen.blit(l1, rect1)
 
-        l2 = my_font_text.render("Moves:" , 1, (255, 255, 255))
+        l2 = my_font_text.render("Moves:", 1, (255, 255, 255))
         rect2 = l2.get_rect(center=(width / 2, 120))
         screen.blit(l2, rect2)
 
-        l3 = my_font_text.render("up - left   : 7" , 1, (255, 255, 255))
+        l3 = my_font_text.render("up - left   : 7", 1, (255, 255, 255))
         rect3 = l3.get_rect(center=(width / 2, 150))
         screen.blit(l3, rect3)
 

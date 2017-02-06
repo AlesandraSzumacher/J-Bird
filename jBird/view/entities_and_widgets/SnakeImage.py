@@ -5,6 +5,7 @@ import pygame
 
 class SnakeImage:
     """Class containing proper image of snake: in ball or without ball"""
+
     def __init__(self):
         """Loads new snake in ball"""
         self.folder = os.path.dirname(os.path.realpath(__file__))

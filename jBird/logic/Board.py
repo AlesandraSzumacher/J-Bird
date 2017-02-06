@@ -5,6 +5,7 @@ from jBird.utils.Constants import BoardSize
 
 class Board:
     """Class containing methods and attributes referring to game board."""
+
     def __init__(self, firstCenter, number_of_levels):
         """Board initializing."""
         self.list_of_tiles = []
@@ -27,9 +28,9 @@ class Board:
         self.list_of_cube_walls.append(CubeWallRight(first_center))
 
         left_next_center = [first_center[0] - BoardSize.TILE_WIDTH.value // 2,
-                          first_center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value]
+                            first_center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value]
         right_next_center = [first_center[0] + BoardSize.TILE_WIDTH.value // 2,
-                           first_center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value]
+                             first_center[1] + BoardSize.TILE_HEIGHT.value // 2 + BoardSize.CUBE_BREAK_HEIGHT.value]
 
         if (self.number_of_levels - 1) == level:
             return
@@ -44,11 +45,10 @@ class Board:
     def count_next_up_tiles(self, center):
         """Gets the position of Tiles up."""
         left_next_center = [center[0] - BoardSize.TILE_WIDTH.value // 2,
-                          center[1] - BoardSize.TILE_HEIGHT.value // 2 - BoardSize.CUBE_BREAK_HEIGHT.value]
+                            center[1] - BoardSize.TILE_HEIGHT.value // 2 - BoardSize.CUBE_BREAK_HEIGHT.value]
         right_next_center = [center[0] + BoardSize.TILE_WIDTH.value // 2,
-                           center[1] - BoardSize.TILE_HEIGHT.value // 2 - BoardSize.CUBE_BREAK_HEIGHT.value]
+                             center[1] - BoardSize.TILE_HEIGHT.value // 2 - BoardSize.CUBE_BREAK_HEIGHT.value]
         return left_next_center, right_next_center
-
 
     def count_two_down_tiles(self, center):
         """Gets the position of two down Tiles."""

@@ -7,6 +7,7 @@ pygame.init()
 
 class Button:
     """Class containing methods which display buttons."""
+
     def create(self, screen, color, x, y, length, height, width, text, text_color):
         """Creating new button."""
         screen = self.draw_button(screen, color, length, height, x, y, width)
