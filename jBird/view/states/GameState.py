@@ -174,7 +174,6 @@ class GameState:
                                 not_frozen = False
 
     def handle_lose(self, font, game, screen):
-        print("obsluzylem")
         lose_label = font.render("Game End. You lost :(  ", 1, (255, 255, 255))
         final_points = font.render("You score:   " + str(game.board.number_of_touched_tiles), 1,
                                    (255, 255, 255))
