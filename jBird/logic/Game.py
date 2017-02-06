@@ -20,6 +20,7 @@ class Game(object):
         self.snake = None
         self.level = 1
         self.round = 1
+        self.save_porints = 0
         self.board = Board([ScreenSize.WIDTH.value // 2, Positions.BOARD_DOWN.value], BoardSize.LEVELS_NUMBER.value)
         self.player = Player("Ola")
         self.chicken = Chicken()
@@ -30,6 +31,7 @@ class Game(object):
     def next_level(self):
         """Changing level into next."""
         self.level += 1
+        self.save_porints = self.board.number_of_touched_tiles
         self.max_number_of_villains = MaxNumberOfVillains.LEVEL_2_3.value
         pygame.time.wait(1000)
 

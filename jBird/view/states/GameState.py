@@ -186,8 +186,9 @@ class GameState:
         """Display widgets on screen"""
         screen.fill(background_colour)
         boardDis.display_board(screen)
+        level_label = arialFont.render("Level: " + str(game.level), 1, (255, 255, 255))
         screen.blit(level_label, (0, 0))
-        points_label = arialFont.render("Points: " + str(game.board.number_of_touched_tiles), 1, (255, 255, 255))
+        points_label = arialFont.render("Points: " + str(game.save_porints + game.board.number_of_touched_tiles), 1, (255, 255, 255))
         screen.blit(points_label, (0, 50))
         hp_label = arialFont.render("Hp: " + str(game.player.hp), 1, (255, 255, 255))
         screen.blit(hp_label, (0, 100))
