@@ -3,6 +3,7 @@ import random
 
 class Snake(object):
     """This class makes and moves snake"""
+
     def __init__(self, board):
         """Initializes new snake"""
         random_pos = random.randint(0, 2) % 2
@@ -39,7 +40,7 @@ class Snake(object):
 
         if board.if_tile_is_in_board(possible_move_down[random_pos]):
             self.set_position(possible_move_down[random_pos])
-        elif board.if_tile_is_in_board(possible_move_down[(random_pos +1) % 2]):
+        elif board.if_tile_is_in_board(possible_move_down[(random_pos + 1) % 2]):
             self.set_position(possible_move_down[(random_pos + 1) % 2])
         else:
             return True
@@ -69,4 +70,3 @@ class Snake(object):
             if board.if_tile_is_in_board(choose_move):
                 self.set_position(choose_move)
         return choose_move
-

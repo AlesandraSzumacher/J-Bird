@@ -1,10 +1,9 @@
-import pygame
-
 from jBird.utils.Constants import Positions
 
 
-class Chicken():
+class Chicken:
     """Class containing methods and attributes referring to chicken moving on the board."""
+
     def __init__(self):
         """"Initialization of chicken."""
         self.position = list(Positions.CHICKEN_INIT_POSITION.value)
@@ -32,7 +31,7 @@ class Chicken():
         return self.position
 
     def move_to_start_position(self):
-        """Moving the chocken back to start position - when die or win a level."""
+        """Moving the chicken back to start position - when die or win a level."""
         self.position = [570, 10]
         self.level = -1
         self.tile_center = [570, 10]

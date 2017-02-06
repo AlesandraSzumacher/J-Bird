@@ -1,7 +1,6 @@
 import os
 
 import pygame
-import sys
 
 from jBird.control.TileControl import TileControl
 from jBird.logic.Board import Board
@@ -9,11 +8,13 @@ from jBird.logic.Chicken import Chicken
 from jBird.utils.Constants import ScreenSize
 from jBird.utils.LevelsUtils import TilesState
 from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
+
 pygame.init()
 
 
 class LevelState():
     """Class derived by states."""
+
     def __init__(self):
         """Init state"""
 
@@ -37,9 +38,7 @@ class LevelState():
 
         pygame.time.wait(1000)
 
-
-
-    def make_animation_move(self, board, board_disp, chicken, moves_to_do, which_time = 1):
+    def make_animation_move(self, board, board_disp, chicken, moves_to_do, which_time=1):
         """Moves chicken in animation."""
         chicken.set_tile_center(moves_to_do)
         tile = board.return_tile_from_board(moves_to_do)
@@ -80,6 +79,7 @@ class LevelState():
 
 class Level1State(LevelState):
     """Class making animation how to play in 1. level."""
+
     def level_label(self, arial_font):
         level_label = arial_font.render("LEVEL 1", 1, (95, 27, 84))
         return level_label
@@ -97,8 +97,10 @@ class Level1State(LevelState):
             self.make_animation_move(board, board_disp, chicken, move)
             self.display_on_screen(background_colour, board_disp, chicken, chicken_image, level_label, screen)
 
+
 class Level2State(LevelState):
     """Class making animation how to play in 2. level."""
+
     def level_label(self, arial_font):
         level_label = arial_font.render("LEVEL 2", 1, (95, 27, 84))
         return level_label
@@ -123,6 +125,7 @@ class Level2State(LevelState):
 
 class Level3State(LevelState):
     """Class making animation how to play in 3. level."""
+
     def level_label(self, arial_font):
         level_label = arial_font.render("LEVEL 3", 1, (95, 27, 84))
         return level_label
@@ -147,4 +150,3 @@ class Level3State(LevelState):
         for move in moves:
             self.make_animation_move(board, board_disp, chicken, move, 1)
             self.display_on_screen(background_colour, board_disp, chicken, chicken_image, level_label, screen)
-

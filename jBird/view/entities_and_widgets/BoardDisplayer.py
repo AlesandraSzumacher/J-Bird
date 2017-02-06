@@ -3,6 +3,7 @@ from jBird.view.entities_and_widgets.TilePolygon import TilePolygon
 
 class BoardDisplay:
     """Class for display board on screen"""
+
     def __init__(self, board):
         """Init board, prepares list of tiles and cube's walls."""
         self.board = board

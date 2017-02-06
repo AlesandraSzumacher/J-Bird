@@ -15,13 +15,15 @@ from jBird.logic.Game import Game
 from jBird.utils.Constants import ScreenSize, Positions
 from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
 from jBird.view.entities_and_widgets.SnakeImage import SnakeImage
-from jBird.view.states.LevelsState import Level1State
 
 pygame.init()
 
 
 class GameState:
+    """Class containing methods and attributes referring to game state."""
+
     def __init__(self):
+        """Initialization of GameState."""
         # Level1State()
         game = Game()
         folder = os.path.dirname(os.path.realpath(__file__))
@@ -159,7 +161,7 @@ class GameState:
                             snake_image.change_ball_into_snake()
 
                         self.display_screen(arial_font, background_colour, ball_image, board_dis, chicken_image, game,
-                                                level_label, snake_image, player_label, screen)
+                                            level_label, snake_image, player_label, screen)
 
                         if_collision = game.check_collision_with_villains()
                         if if_collision:
