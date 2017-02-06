@@ -12,7 +12,7 @@ from jBird.view.entities_and_widgets.BoardDisplayer import BoardDisplay
 pygame.init()
 
 
-class LevelState():
+class LevelState:
     """Class derived by states."""
 
     def __init__(self):
@@ -27,7 +27,7 @@ class LevelState():
         background_colour = (0, 0, 0)
         screen.fill(background_colour)
 
-        arial_font = pygame.font.SysFont("monospace", 80)
+        arial_font = pygame.font.SysFont("monospace", 80, True)
         level_label = self.level_label(arial_font)
 
         board = Board([600.5, 350], 2)
@@ -64,7 +64,10 @@ class LevelState():
     def display_on_screen(self, background_colour, board_disp, chicken, chicken_image, level_label, screen):
         """Display all widgets on board"""
         screen.fill(background_colour)
-        screen.blit(level_label, (ScreenSize.WIDTH.value // 2 - 140, 100))
+
+        rect1 = level_label.get_rect(center=(ScreenSize.WIDTH.value / 2, 100))
+
+        screen.blit(level_label, rect1)
         board_disp.display_board(screen)
         screen.blit(chicken_image, chicken.get_position())
         pygame.display.flip()
@@ -81,7 +84,7 @@ class Level1State(LevelState):
     """Class making animation how to play in 1. level."""
 
     def level_label(self, arial_font):
-        level_label = arial_font.render("LEVEL 1", 1, (95, 27, 84))
+        level_label = arial_font.render("LEVEL 1", 1,  (255, 255, 255))
         return level_label
 
     def animation(self, background_colour, board, board_disp, folder, level_label, screen):
@@ -102,7 +105,7 @@ class Level2State(LevelState):
     """Class making animation how to play in 2. level."""
 
     def level_label(self, arial_font):
-        level_label = arial_font.render("LEVEL 2", 1, (95, 27, 84))
+        level_label = arial_font.render("LEVEL 2", 1,  (255, 255, 255))
         return level_label
 
     def animation(self, background_colour, board, board_disp, folder, level_label, screen):
@@ -127,7 +130,7 @@ class Level3State(LevelState):
     """Class making animation how to play in 3. level."""
 
     def level_label(self, arial_font):
-        level_label = arial_font.render("LEVEL 3", 1, (95, 27, 84))
+        level_label = arial_font.render("LEVEL 3", 1, (255, 255, 255))
         return level_label
 
     def animation(self, background_colour, board, board_disp, folder, level_label, screen):
